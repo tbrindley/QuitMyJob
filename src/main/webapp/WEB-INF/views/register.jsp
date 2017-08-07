@@ -9,9 +9,48 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Registration</title>
 </head>
 <body>
+<h1>Ready to register?</h1>
+<form method = "post" action ="/addfinancials">
+    <fieldset>
+        <legend>Let's set up your login information</legend>
+        <div class="container">
+            <label><b>UserName</b></label>
+            <br>
+        <input type ="text" placeholder ="Enter a username" name ="u_name" required>
+        <br>
+        <br>
+            <label><b>Email</b></label>
+            <br>
+            <input type ="text" placeholder ="Enter an Email" name ="email" required>
+            <br>
+            <br>
+            <label><b>Password</b></label>
+            <br>
+            <input type ="text" placeholder ="Enter a password" name ="psw" onkeyup='check();' required>
+            <br>
+            <br>
+            <label><b>Repeat Password</b></label>
+            <br>
+            <input type ="text" placeholder ="Repeat password" name ="psw-repeat" onkeyup='check()'; required>
+            <br>
+            <input type ="checkbox" checked ="checked"> Remember me
+            <br>
+            <br>
+            <label><b>Current job</b></label>
+            <br>
+            <input type ="text" placeholder ="Current Job" name ="curjob" required>
+            <br>
+            <br>
+            <div>
+                <button type ="submit" class="signupbtn">Sign Up</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
 
 </body>
 </html>
