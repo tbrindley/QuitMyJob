@@ -20,7 +20,7 @@ public class HomeController {
     {
 
         return new
-                ModelAndView("index","message","Hello, World");
+                ModelAndView("index","message","Welcome to Quit My Job Web App");
 
     }
 
