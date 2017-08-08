@@ -7,20 +7,22 @@ import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+import org.hibernate.*; import org.hibernate.cfg.Configuration;
 @Controller
 public class HomeController {
 
     @RequestMapping("/")
 
-    public ModelAndView helloWorld()
-    {
+    public ModelAndView helloWorld() {
 
         return new
-                ModelAndView("index","message","Welcome to Quit My Job Web App");
+                ModelAndView("index", "message", "Welcome to Quit My Job Web App");
 
     }
 

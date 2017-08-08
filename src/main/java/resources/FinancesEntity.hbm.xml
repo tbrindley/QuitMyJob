@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.fp.models.FinancesEntity" table="finances" schema="quitmyjob">
+        <id name="finId">
+            <column name="fin_id" sql-type="int(10) unsigned"/>
+        </id>
+        <property name="housing">
+            <column name="housing" sql-type="int(10) unsigned"/>
+        </property>
+        <property name="transporation">
+            <column name="transporation" sql-type="int(10) unsigned"/>
+        </property>
+        <property name="savings">
+            <column name="savings" sql-type="int(10) unsigned"/>
+        </property>
+        <property name="extras">
+            <column name="extras" sql-type="int(11)"/>
+        </property>
+        <property name="food">
+            <column name="food" sql-type="int(11)"/>
+        </property>
+        <property name="debt">
+            <column name="debt" sql-type="int(11)"/>
+        </property>
+    </class>
+</hibernate-mapping>
