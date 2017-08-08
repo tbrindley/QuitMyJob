@@ -55,7 +55,7 @@
 <body>
 <h1>${message}</h1><br>
 <br>
-<form:form method="POST" action="/userhome">
+<form:form method="POST" action="/userhome" onclick="validate()">
     <section>
         <fieldset>
             <legend>
@@ -95,6 +95,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+
+<script src="../../webresources/js/validation.js"></script>
 
 </body>
 </html>

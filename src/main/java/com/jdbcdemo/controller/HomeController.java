@@ -55,15 +55,6 @@ public class HomeController {
     @RequestMapping("/jobsearch")
     public String jobSearch(){
 
-        //the HTTPClient Interface represents the contract for the HTTP Request execution
-        HttpClient http = HttpClientBuilder.create().build();
-
-        HttpHost host = new HttpHost("forecast.weather.gov", 80, "http");
-
-        // HttpGet retrieves the info identified by the request URI (in the form of an entity)
-        HttpGet getPage = new HttpGet("/MapClick.php?lat=42.331427&lon=-83.045754&FcstType=json");
-
-
         return "jobsearch";
     }
 }
