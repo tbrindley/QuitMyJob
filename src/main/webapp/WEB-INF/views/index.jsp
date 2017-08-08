@@ -58,7 +58,7 @@
 <body>
 <h1>${message}</h1><br>
 <br>
-<form:form method="POST" action="/userhome" onclick="validate()">
+<form method="POST" action="/userhome" onclick="return validate()">
     <section>
         <fieldset>
             <legend>
@@ -82,7 +82,7 @@
             </table>
         </fieldset>
     </section>
-</form:form>
+</form>
 <br>
 <br>
 <a href="register"> <button>Register!</button></a>
