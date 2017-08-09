@@ -25,6 +25,12 @@ public class BoLS {
             HttpPost postRequest = new HttpPost("https://api.bls.gov/publicAPI/v2/timeseries/data/");
             StringEntity input = new StringEntity("{\"seriesid\":[\"SUUR0000SAF\",\"SUUR0000SAH\"]}");
 
+            //Housing annual average:  need to divide by 12     CXUHOUSINGLB0701M
+            //Transportation annual averages:  need to divide by 12    CXUTRANSLB1103M
+            // savings
+            //food annual averages:  need to divide by 12   CXUFOODTOTLLB1103M
+            //other expenses annual averages:  need to divide by 12    CXUMISCLB1103M
+            // debt  expenses annual "divide by 12"   5,252
 
             input.setContentType("application/json");
             postRequest.setEntity(input);
