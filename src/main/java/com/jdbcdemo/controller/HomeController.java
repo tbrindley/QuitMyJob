@@ -76,7 +76,29 @@ public class HomeController {
         }
 
         @RequestMapping("/userhome")
-        public String userHome () {
+        public String userHome (@RequestParam("th_savings") int savings,
+                                @RequestParam("th_income") int income,
+                                @RequestParam("rent") int rent,
+                                @RequestParam("utils") int utils,@RequestParam("gas") int gas, @RequestParam("c_insurance")
+                                               int c_ins,@RequestParam("c_bill") int c_bill,@RequestParam("groceries")
+                                                int groceries,@RequestParam("restaurant") int rest,@RequestParam("creditCard") int cCard,
+                                @RequestParam("s_loans") int s_loans,@RequestParam("o_debt") int o_debt,@RequestParam("o_expense")
+                                               int o_exp,@RequestParam("meds") int meds, Model model) {
+
+                model.addAttribute("th_savings",savings);
+                model.addAttribute("th_income", income);
+                model.addAttribute("rent", rent);
+                model.addAttribute("utils",utils);
+                model.addAttribute("gas",gas);
+                model.addAttribute("c_insurance", c_ins);
+                model.addAttribute("c_bill",c_bill);
+                model.addAttribute("groceries",groceries);
+                model.addAttribute("restaurant",rest);
+                model.addAttribute("creditCard",cCard);
+                model.addAttribute("s_loans",s_loans);
+                model.addAttribute("o_debt",o_debt);
+                model.addAttribute("o_expense", o_exp);
+                model.addAttribute("meds", meds);
 
             return "countdown";
         }
