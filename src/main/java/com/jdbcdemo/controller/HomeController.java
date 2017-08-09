@@ -37,7 +37,7 @@ public class HomeController {
 
     @RequestMapping("/addfinancials")
     public String addFinancials(Model model) {
-        
+
         int[]arrayList = BoLS.getBoLS();
 
         //populates financial form with Midwest averages
