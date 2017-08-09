@@ -45,10 +45,6 @@
             <input type="text" name="utils" size="30" maxlength="100" required>
         </label>
         <br>
-        <label>
-            Insurance:
-            <input type="text" name="h_insurance" size="30" maxlength="100">
-        </label>
     </fieldset>
     <br>
     <fieldset>
@@ -85,10 +81,6 @@
             <input type="text" name="restaurant" size="30" maxlength="100">
         </label>
         <br>
-        <label>
-            Other Food Expenses:
-            <input type="text" name="f_other" size="30" maxlength="100">
-        </label>
     </fieldset>
     <br>
     <fieldset>
