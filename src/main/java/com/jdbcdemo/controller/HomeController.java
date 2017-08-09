@@ -4,6 +4,7 @@ package com.jdbcdemo.controller;
  * Created by Travis Brindley on 7/21/2017.
  */
 import com.fp.models.Clients;
+import com.jdbcdemo.BoLS;
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -25,53 +26,33 @@ import java.util.ArrayList;
 public class HomeController {
 
     @RequestMapping("/")
-
-    public ModelAndView helloWorld() {
-
-        return new
-                ModelAndView("index", "message", "Welcome to Quit My Job Web App");
-
+    public String homePage(){
+        return "index";
     }
 
     @RequestMapping("/register")
     public String addClients() {
-
-
         return "register";
     }
 
     @RequestMapping("/addfinancials")
-    public String addFinancials(@RequestParam("user_id") String userName,
-                                @RequestParam("email") String Email,
-                                @RequestParam("psw") String pswd,
-                                @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException {
+    public String addFinancials(Model model) {
+        
+        int[]arrayList = BoLS.getBoLS();
 
-        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-
-        SessionFactory sessionFact = cfg.buildSessionFactory();
-
-        Session session = sessionFact.openSession();
-        Transaction tx = session.beginTransaction();
-
-        Clients newClient = new Clients();
-
-        newClient.setEmail(Email);
-        newClient.setPassword(pswd);
-        newClient.setUserId(userName);
-        newClient.setJob(career);
-
-        session.save(newClient);
-        tx.commit();
-        session.close();
-
-        model.addAttribute("newStuff", newClient);
-        //step 6 process results
-        ArrayList<String> list = new ArrayList<String>();
-
-
-        model.addAttribute("dbResult", list);
-
-
+        //populates financial form with Midwest averages
+        model.addAttribute("rent",arrayList[0]);
+        model.addAttribute("utilities",arrayList[1]);
+        model.addAttribute("autoGas",arrayList[2]);
+        model.addAttribute("carInsurance",arrayList[3]);
+        model.addAttribute("carPayment",arrayList[4]);
+        model.addAttribute("groceries",arrayList[5]);
+        model.addAttribute("restaurant",arrayList[6]);
+        model.addAttribute("studentLoans",arrayList[7]);
+        model.addAttribute("medInsurance",arrayList[8]);
+        model.addAttribute("miscExpenses",arrayList[9]);
+        model.addAttribute("creditCard",arrayList[10]);
+        model.addAttribute("otherMisc",arrayList[11]);
             return "createfinancials";
         }
 

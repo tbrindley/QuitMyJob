@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class BoLS {
 
-    public String[] getBoLS(){
+    public static int[] getBoLS() {
  /*     CATEGORY          BoLS Series ID      Array Position
         rent:             CXUHOUSINGLB1103M     0
         Utilities:       CXUUTILSLB1103M        1
@@ -37,13 +37,13 @@ public class BoLS {
         Misc. Expenses:  CXUMISCLB1103M         9*/
 
 
-        String[] userdata = new String[11];
+        int[] userdata = new int[12];
         String jsonString;
         try {
             //the HTTPClient Interface represents the contract for the HTTP Request execution
             HttpClient httpClient = HttpClientBuilder.create().build();
             HttpPost postRequest = new HttpPost("https://api.bls.gov/publicAPI/v2/timeseries/data/");
-            // StringEntity input = new StringEntity("{\"seriesid\":[\"CXUHOUSINGLB1103M\",\"CXUTRANSLB1103M\",\"CXUFOODTOTLLB1103M\",\"CXUMISCLB1103M\"]}");
+
             StringEntity input = new StringEntity("{\"seriesid\":[\"CXUHOUSINGLB1103M\",\"CXUUTILSLB1103M\",\"CXUGASOILLB1103M\",\"CXU500110LB1103M\",\"CXUVEHPURCHLB1103M\",\"CXUFOODHOMELB1103M\",\"CXUFOODAWAYLB1103M\"," +
                     "\"CXUEDUCATNLB1103M\",\"CXUHLTHINSRLB1103M\",\"CXUMISCLB1103M\"], \"registrationkey\": \"7d91307a15b744eca9c42ac828a1d070\"}");
 
@@ -57,45 +57,14 @@ public class BoLS {
 
             JSONArray series = json.getJSONObject("Results").getJSONArray("series");
 
-            for(int i=0;i< series.length();i++){
+            for (int i = 0; i < series.length(); i++) {
                 JSONArray data = series.getJSONObject(i).getJSONArray("data");
                 String output = data.getJSONObject(0).getString("value");
-                userdata[i] = output;
+                userdata[i] = Integer.parseInt(output)/12;
                 System.out.println(userdata[i]);
             }
-
-            int rent = Integer.parseInt(userdata[0])/12;
-            int utilities = Integer.parseInt(userdata[1])/12;
-            int gas = Integer.parseInt(userdata[2])/12;
-            int carInsurance = Integer.parseInt(userdata[3])/12;
-            int carPayment = Integer.parseInt(userdata[4])/12;
-            int groceries = Integer.parseInt(userdata[5])/12;
-            int restaurants = Integer.parseInt(userdata[6])/12;
-            String cc = "189";
-            int studentLoans = Integer.parseInt(userdata[7])/12;
-            String miscDebt = "0";
-            int medInsurance = Integer.parseInt(userdata[8])/12;
-            int otherMisc = Integer.parseInt(userdata[9])/12;
-            userdata[10]=cc;
-            userdata[11]=miscDebt;
-
-            System.out.println("------HOUSING STUFF-----");
-            System.out.println("Housing: "+ rent);
-            System.out.println("Utilities: "+ utilities);
-            System.out.println("-------- TRANSPORTATION STUFF--------");
-            System.out.println("Gas: "+ gas);
-            System.out.println("Car Insurance: "+ carInsurance);
-            System.out.println("Car Payment: "+ carPayment);
-            System.out.println("------ FOOD STUFF --------");
-            System.out.println("Groceries: "+ groceries);
-            System.out.println("Restaurants: "+ restaurants);
-            System.out.println("--------DEBT ---------");
-            System.out.println("Monthly Credit Card Payments: " + cc);
-            System.out.println("Monthly Student Loan Payment: " + studentLoans);
-            System.out.println("Monthly Misc. Debt:" + miscDebt);
-            System.out.println("-------- MISC -------");
-            System.out.println("Monthly Medical Insurance: " + medInsurance);
-            System.out.println("Other Misc:" + otherMisc);
+            userdata[10] = 189;
+            userdata[11] = 0;
 
         } catch (IOException e) {
             e.printStackTrace();
