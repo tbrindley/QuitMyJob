@@ -17,29 +17,29 @@
     <fieldset>
         <legend>Let's set up your login information</legend>
         <div class="container">
-            <label><b>UserName</b></label>
+            <label><b>User Name:</b></label>
             <br>
         <input type ="text" placeholder ="Enter a username" name ="user_id" required>
         <br>
         <br>
-            <label><b>Email</b></label>
+            <label><b>Email:</b></label>
             <br>
-            <input type ="text" placeholder ="Enter an Email" name ="email" required>
-            <br>
-            <br>
-            <label><b>Password</b></label>
-            <br>
-            <input type ="text" placeholder ="Enter a password" name ="psw" onkeyup='check();' required>
+            <input type ="email" placeholder ="Enter an Email" name ="email" required>
             <br>
             <br>
-            <label><b>Repeat Password</b></label>
+            <label><b>Password:</b></label>
             <br>
-            <input type ="text" placeholder ="Repeat password" name ="psw-repeat" onkeyup='check()'; required>
+            <input type ="password" placeholder ="Enter a password" name ="psw" onkeyup='check();' required>
+            <br>
+            <br>
+            <label><b>Repeat Password:</b></label>
+            <br>
+            <input type ="password" placeholder ="Repeat password" name ="psw-repeat" onkeyup='check()'; required>
             <br>
             <input type ="checkbox" checked ="checked"> Remember me
             <br>
             <br>
-            <label><b>Current job</b></label>
+            <label><b>Current job:</b></label>
             <br>
             <input type ="text" placeholder ="Current Job" name ="curjob" required>
             <br>
