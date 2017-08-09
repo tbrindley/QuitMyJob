@@ -71,6 +71,7 @@ public class HomeController {
 
         model.addAttribute("dbResult", list);
 
+
             return "createfinancials";
         }
 
@@ -106,5 +107,6 @@ public class HomeController {
 
             return "jobsearch";
         }
+
     }
 

@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.fp.models.FinancesEntity" table="finances" schema="quitmyjob">
+    <class name="com.fp.models.Finances" table="finances" schema="quitmyjob">
         <id name="finId">
             <column name="fin_id" sql-type="int(10) unsigned"/>
         </id>

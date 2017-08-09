@@ -19,7 +19,7 @@
         <div class="container">
             <label><b>UserName</b></label>
             <br>
-        <input type ="text" placeholder ="Enter a username" name ="u_name" required>
+        <input type ="text" placeholder ="Enter a username" name ="user_id" required>
         <br>
         <br>
             <label><b>Email</b></label>

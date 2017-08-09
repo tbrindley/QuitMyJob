@@ -4,10 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.fp.models.ClientsEntity" table="clients" schema="quitmyjob">
+    <class name="com.fp.models.Clients" table="clients" schema="quitmyjob">
         <id name="clientId">
             <column name="client_id" sql-type="int(10) unsigned"/>
         </id>
+        <property name="userId">
+            <column name="user_id" sql-type="varchar(45)" length="45"/>
+        </property>
         <property name="email">
             <column name="email" sql-type="varchar(45)" length="45"/>
         </property>
