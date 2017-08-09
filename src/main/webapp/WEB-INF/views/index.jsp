@@ -56,7 +56,7 @@
 
 
 <body>
-<h1>${message}</h1><br>
+
 <br>
 <form method="POST" action="/userhome" onclick="return validate()">
     <section>

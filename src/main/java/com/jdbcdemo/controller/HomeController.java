@@ -4,6 +4,7 @@ package com.jdbcdemo.controller;
  * Created by Travis Brindley on 7/21/2017.
  */
 import com.fp.models.Clients;
+import com.jdbcdemo.BoLS;
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -25,58 +26,60 @@ import java.util.ArrayList;
 public class HomeController {
 
     @RequestMapping("/")
-
-    public ModelAndView helloWorld() {
-
-        return new
-                ModelAndView("index", "message", "Welcome to Quit My Job Web App");
-
+    public String homePage(){
+        return "index";
     }
 
     @RequestMapping("/register")
     public String addClients() {
-
-
         return "register";
     }
 
     @RequestMapping("/addfinancials")
-    public String addFinancials(@RequestParam("user_id") String userName,
-                                @RequestParam("email") String Email,
-                                @RequestParam("psw") String pswd,
-                                @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException {
+    public String addFinancials(Model model) {
 
-        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+        int[]arrayList = BoLS.getBoLS();
 
-        SessionFactory sessionFact = cfg.buildSessionFactory();
-
-        Session session = sessionFact.openSession();
-        Transaction tx = session.beginTransaction();
-
-        Clients newClient = new Clients();
-
-        newClient.setEmail(Email);
-        newClient.setPassword(pswd);
-        newClient.setUserId(userName);
-        newClient.setJob(career);
-
-        session.save(newClient);
-        tx.commit();
-        session.close();
-
-        model.addAttribute("newStuff", newClient);
-        //step 6 process results
-        ArrayList<String> list = new ArrayList<String>();
-
-
-        model.addAttribute("dbResult", list);
-
-
+        //populates financial form with Midwest averages
+        model.addAttribute("rent",arrayList[0]);
+        model.addAttribute("utilities",arrayList[1]);
+        model.addAttribute("autoGas",arrayList[2]);
+        model.addAttribute("carInsurance",arrayList[3]);
+        model.addAttribute("carPayment",arrayList[4]);
+        model.addAttribute("groceries",arrayList[5]);
+        model.addAttribute("restaurant",arrayList[6]);
+        model.addAttribute("studentLoans",arrayList[7]);
+        model.addAttribute("medInsurance",arrayList[8]);
+        model.addAttribute("miscExpenses",arrayList[9]);
+        model.addAttribute("creditCard",arrayList[10]);
+        model.addAttribute("otherMisc",arrayList[11]);
             return "createfinancials";
         }
 
         @RequestMapping("/userhome")
-        public String userHome () {
+        public String userHome (@RequestParam("th_savings") int savings,
+                                @RequestParam("th_income") int income,
+                                @RequestParam("rent") int rent,
+                                @RequestParam("utils") int utils,@RequestParam("gas") int gas, @RequestParam("c_insurance")
+                                               int c_ins,@RequestParam("c_bill") int c_bill,@RequestParam("groceries")
+                                                int groceries,@RequestParam("restaurant") int rest,@RequestParam("creditCard") int cCard,
+                                @RequestParam("s_loans") int s_loans,@RequestParam("o_debt") int o_debt,@RequestParam("o_expense")
+                                               int o_exp,@RequestParam("meds") int meds, Model model) {
+
+                model.addAttribute("th_savings",savings);
+                model.addAttribute("th_income", income);
+                model.addAttribute("rent", rent);
+                model.addAttribute("utils",utils);
+                model.addAttribute("gas",gas);
+                model.addAttribute("c_insurance", c_ins);
+                model.addAttribute("c_bill",c_bill);
+                model.addAttribute("groceries",groceries);
+                model.addAttribute("restaurant",rest);
+                model.addAttribute("creditCard",cCard);
+                model.addAttribute("s_loans",s_loans);
+                model.addAttribute("o_debt",o_debt);
+                model.addAttribute("o_expense", o_exp);
+                model.addAttribute("meds", meds);
 
             return "countdown";
         }

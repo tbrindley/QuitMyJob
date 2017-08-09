@@ -37,12 +37,12 @@
         </legend>
         <label>
             Mortgage/Rent:
-            <input type="text" name="rent" size="30" maxlength="100" required>
+            <input type="text" name="rent" size="30" maxlength="100" value="${rent}" required>
         </label>
         <br>
         <label>
             Utilities:
-            <input type="text" name="utils" size="30" maxlength="100" required>
+            <input type="text" name="utils" size="30" maxlength="100" value="${utilities}" required>
         </label>
         <br>
     </fieldset>
@@ -53,17 +53,17 @@
         </legend>
         <label>
             Gasoline:
-            <input type="text" name="gas" size="30" maxlength="100">
+            <input type="text" name="gas" size="30" value="${autoGas}" maxlength="100">
         </label>
         <br>
         <label>
             Insurance:
-            <input type="text" name="c_insurance" size="30" maxlength="100">
+            <input type="text" name="c_insurance" size="30" value="${carInsurance}" maxlength="100">
         </label>
         <br>
         <label>
             Car note:
-            <input type="text" name="c_bill" size="30" maxlength="100">
+            <input type="text" name="c_bill" size="30" value="${carPayment}" maxlength="100">
         </label>
     </fieldset>
     <br>
@@ -73,12 +73,12 @@
         </legend>
         <label>
             Groceries:
-            <input type="text" name="groceries" size="30" maxlength="100">
+            <input type="text" name="groceries" size="30" value="${groceries}" maxlength="100">
         </label>
         <br>
         <label>
             Restaurants:
-            <input type="text" name="restaurant" size="30" maxlength="100">
+            <input type="text" name="restaurant" size="30" value="${restaurant}" maxlength="100">
         </label>
         <br>
     </fieldset>
@@ -89,17 +89,17 @@
         </legend>
         <label>
             Credit Cards:
-            <input type="text" name="creditCard" size="30" maxlength="100">
+            <input type="text" name="creditCard" size="30" value="${creditCard}"  maxlength="100">
         </label>
         <br>
         <label>
             Student Loans:
-            <input type="text" name="s_loans" size="30" maxlength="100">
+            <input type="text" name="s_loans" size="30" value="${studentLoans}"  maxlength="100">
         </label>
         <br>
         <label>
             Other Debt:
-            <input type="text" name="o_debt" size="30" maxlength="100">
+            <input type="text" name="o_debt" size="30" value="${miscExpenses}"  maxlength="100">
         </label>
     </fieldset>
     <br>
@@ -109,12 +109,12 @@
         </legend>
         <label>
             Medicine:
-            <input type="text" name="meds" size="30" maxlength="100">
+            <input type="text" name="meds" size="30" value="${medInsurance}"  maxlength="100">
         </label>
         <br>
         <label>
             Other Expenses
-            <input type="text" name="o_expense" size="30" maxlength="100">
+            <input type="text" name="o_expense" size="30" value="${otherMisc}"  maxlength="100">
         </label>
     </fieldset>
     <br><br>
