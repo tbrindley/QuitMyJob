@@ -11,9 +11,10 @@ import javax.persistence.Id;
 @Entity
 public class Finances {
     private int finId;
+    private int savings;
+    private int income;
     private int housing;
     private int transporation;
-    private int savings;
     private int extras;
     private int food;
     private int debt;
@@ -26,6 +27,26 @@ public class Finances {
 
     public void setFinId(int finId) {
         this.finId = finId;
+    }
+
+    @Basic
+    @Column(name = "savings", nullable = false)
+    public int getSavings() {
+        return savings;
+    }
+
+    public void setSavings(int savings) {
+        this.savings = savings;
+    }
+
+    @Basic
+    @Column(name = "income", nullable = false)
+    public int getIncome() {
+        return income;
+    }
+
+    public void setIncome(int income) {
+        this.income = income;
     }
 
     @Basic
@@ -46,16 +67,6 @@ public class Finances {
 
     public void setTransporation(int transporation) {
         this.transporation = transporation;
-    }
-
-    @Basic
-    @Column(name = "savings", nullable = false)
-    public int getSavings() {
-        return savings;
-    }
-
-    public void setSavings(int savings) {
-        this.savings = savings;
     }
 
     @Basic
@@ -96,9 +107,10 @@ public class Finances {
         Finances finances = (Finances) o;
 
         if (finId != finances.finId) return false;
+        if (savings != finances.savings) return false;
+        if (income != finances.income) return false;
         if (housing != finances.housing) return false;
         if (transporation != finances.transporation) return false;
-        if (savings != finances.savings) return false;
         if (extras != finances.extras) return false;
         if (food != finances.food) return false;
         if (debt != finances.debt) return false;
@@ -109,9 +121,10 @@ public class Finances {
     @Override
     public int hashCode() {
         int result = finId;
+        result = 31 * result + savings;
+        result = 31 * result + income;
         result = 31 * result + housing;
         result = 31 * result + transporation;
-        result = 31 * result + savings;
         result = 31 * result + extras;
         result = 31 * result + food;
         result = 31 * result + debt;
