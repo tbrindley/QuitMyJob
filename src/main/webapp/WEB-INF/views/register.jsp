@@ -13,7 +13,7 @@
 </head>
 <body>
 <h1>Ready to register?</h1>
-<form method = "post" action ="/addfinancials">
+<form method = "post" action ="/addUserFinancials">
     <fieldset>
         <legend>Let's set up your login information</legend>
         <div class="container">

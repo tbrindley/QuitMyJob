@@ -35,8 +35,53 @@ public class HomeController {
         return "register";
     }
 
-    @RequestMapping("/addfinancials")
-    public String addFinancials(Model model) {
+    @RequestMapping("/addUserFinancials")
+    //adds registration info. to DB
+    public String addUserFinancials(@RequestParam("user_id") String userName,
+                                            @RequestParam("email") String Email,
+                                            @RequestParam("psw") String pswd,
+                                            @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException {
+
+        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+        SessionFactory sessionFact = cfg.buildSessionFactory();
+        Session session = sessionFact.openSession();
+        Transaction tx = session.beginTransaction();
+
+        Clients newClient = new Clients();
+        newClient.setEmail(Email);
+        newClient.setPassword(pswd);
+        newClient.setUserId(userName);
+        newClient.setJob(career);
+
+        session.save(newClient);
+        tx.commit();
+        session.close();
+
+        model.addAttribute("newStuff", newClient);
+
+        ArrayList<String> list = new ArrayList<String>();
+        model.addAttribute("dbResult", list);
+
+
+        int[]arrayList = BoLS.getBoLS();
+
+        //populates financial form with Midwest averages
+        model.addAttribute("rent",arrayList[0]);
+        model.addAttribute("utilities",arrayList[1]);
+        model.addAttribute("autoGas",arrayList[2]);
+        model.addAttribute("carInsurance",arrayList[3]);
+        model.addAttribute("carPayment",arrayList[4]);
+        model.addAttribute("groceries",arrayList[5]);
+        model.addAttribute("restaurant",arrayList[6]);
+        model.addAttribute("studentLoans",arrayList[7]);
+        model.addAttribute("medInsurance",arrayList[8]);
+        model.addAttribute("miscExpenses",arrayList[9]);
+        model.addAttribute("creditCard",arrayList[10]);
+        model.addAttribute("otherMisc",arrayList[11]);
+        return "createfinancials";
+    }
+    @RequestMapping("/addGuestFinancials")
+    public String addGuestFinancials(Model model) {
 
         int[]arrayList = BoLS.getBoLS();
 
