@@ -5,6 +5,7 @@ package com.fp.dao;
  */
 public class DAOFactory {
     public static final int FINANCES_DAO = 0;
+    public static final int USER_DAO = 0;
 
     public static FinancesDAO getinstance(int financesDao) {
 
@@ -17,4 +18,5 @@ public class DAOFactory {
         }
         return null;
     }
+
 }

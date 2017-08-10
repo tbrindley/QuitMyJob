@@ -16,6 +16,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -87,13 +88,41 @@ public class HomeController {
         return "createfinancials";
     }
     @RequestMapping("/login")
-    public ModelAndView login (Model model){
+    public String login (Model model, @RequestParam("userName")String username, @RequestParam("password") String password){
         //authenticate user
-        int client_id =8;
-        //user authenticated now pull data from DB
-        FinancesDAO financesDAO = DAOFactory.getinstance(DAOFactory.FINANCES_DAO);
-        Finances finances = financesDAO.getFinancesInfoByClientId(client_id);
-        return new ModelAndView("countdown", "finances",finances);
+
+            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+            SessionFactory sessionFact = cfg.buildSessionFactory();
+            Session session = sessionFact.openSession();
+            Transaction tx = session.beginTransaction();
+
+            Criteria crit = session.createCriteria(Clients.class);
+            ArrayList<Clients> list = (ArrayList<Clients>) crit.list();
+            for(int i = 0; i < list.size(); i++){
+                Clients tempClient = list.get(i);
+                if (username.equalsIgnoreCase(tempClient.getUserId())){
+                    if(password.equalsIgnoreCase(tempClient.getPassword())){
+                        int client_id = tempClient.getClientId();
+                        //user authenticated now pull data from DB
+
+                        int[]arrayList = TimeLeft.getTimeLeft(client_id); //HardCode
+
+                        //populates financial form with Midwest averages
+                        model.addAttribute("months",arrayList[0]);
+                        model.addAttribute("days",arrayList[1]);
+                        model.addAttribute("hours",arrayList[2]);
+                        model.addAttribute("min",arrayList[3]);
+
+                        return "countdown";
+                    }
+                }
+            }
+/*            tx.commit();
+            session.close();*/
+
+        return "index";
+
+
     }
     @RequestMapping("/addGuestFinancials")
     public String addGuestFinancials(Model model) {

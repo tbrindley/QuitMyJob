@@ -43,6 +43,7 @@ public class TimeLeft {
         {
             int asset = getAssets(client_id);
             int liability = getLiabilities(client_id);
+            int monthlyIncome = monthlyIncome(client_id);
 
             int[] daysleft = new int[4];
             //set months
@@ -50,7 +51,7 @@ public class TimeLeft {
             while (asset >= liability) {
                 month++;
                 asset -= liability;
-                asset += monthlyIncome(client_id);
+                asset += monthlyIncome;
             }
             int days = 0;
 
@@ -58,7 +59,7 @@ public class TimeLeft {
             while (asset >= liability) {
                 days++;
                 asset -= liability;
-                asset += (monthlyIncome(client_id) / 30);
+                asset += monthlyIncome / 30;
             }
             int hours = 0;
             liability = liability / 24;
