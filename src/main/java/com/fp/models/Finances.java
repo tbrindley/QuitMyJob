@@ -141,4 +141,19 @@ public class Finances {
         result = 31 * result + debt;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Finances{" +
+                "finId=" + finId +
+                ", savings=" + savings +
+                ", income=" + income +
+                ", housing=" + housing +
+                ", transporation=" + transporation +
+                ", extras=" + extras +
+                ", food=" + food +
+                ", debt=" + debt +
+                ", clientid=" + clientid +
+                '}';
+    }
 }

@@ -26,6 +26,7 @@
 
 </head>
 <body>
+${finances}
 <div id="test" style="text-align: center; padding-top: 10%; font-size: 44px;">
 
 </div>

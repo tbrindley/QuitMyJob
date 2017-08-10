@@ -3,6 +3,8 @@ package com.jdbcdemo.controller;
 /**
  * Created by Travis Brindley on 7/21/2017.
  */
+import com.fp.dao.DAOFactory;
+import com.fp.dao.FinancesDAO;
 import com.fp.models.Clients;
 import com.fp.models.Finances;
 import com.jdbcdemo.BoLS;
@@ -83,6 +85,15 @@ public class HomeController {
         model.addAttribute("creditCard",arrayList[10]);
         model.addAttribute("otherMisc",arrayList[11]);
         return "createfinancials";
+    }
+    @RequestMapping("/login")
+    public ModelAndView login (Model model){
+        //authenticate user
+        int client_id =8;
+        //user authenticated now pull data from DB
+        FinancesDAO financesDAO = DAOFactory.getinstance(DAOFactory.FINANCES_DAO);
+        Finances finances = financesDAO.getFinancesInfoByClientId(client_id);
+        return new ModelAndView("countdown", "finances",finances);
     }
     @RequestMapping("/addGuestFinancials")
     public String addGuestFinancials(Model model) {
