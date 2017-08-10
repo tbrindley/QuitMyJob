@@ -40,31 +40,38 @@ public class BoLS {
         int[] userdata = new int[12];
         String jsonString;
         try {
+
             //the HTTPClient Interface represents the contract for the HTTP Request execution
             HttpClient httpClient = HttpClientBuilder.create().build();
+
+            //connects to bls api
             HttpPost postRequest = new HttpPost("https://api.bls.gov/publicAPI/v2/timeseries/data/");
 
-            StringEntity input = new StringEntity("{\"seriesid\":[\"CXUHOUSINGLB1103M\",\"CXUUTILSLB1103M\",\"CXUGASOILLB1103M\",\"CXU500110LB1103M\",\"CXUVEHPURCHLB1103M\",\"CXUFOODHOMELB1103M\",\"CXUFOODAWAYLB1103M\"," +
-                    "\"CXUEDUCATNLB1103M\",\"CXUHLTHINSRLB1103M\",\"CXUMISCLB1103M\"], \"registrationkey\": \"7d91307a15b744eca9c42ac828a1d070\"}");
+            //pulls specific search parameters
+            StringEntity input = new StringEntity("{\"seriesid\":[\"CXUHOUSINGLB1103M\",\"CXUUTILSLB1103M\",\"CXUGASOILLB1103M\"," +
+                    "\"CXU500110LB1103M\",\"CXUVEHPURCHLB1103M\",\"CXUFOODHOMELB1103M\",\"CXUFOODAWAYLB1103M\"," +
+                    "\"CXUEDUCATNLB1103M\",\"CXUHLTHINSRLB1103M\",\"CXUMISCLB1103M\"]," +
+                    " \"registrationkey\": \"7d91307a15b744eca9c42ac828a1d070\"}");
 
 
             input.setContentType("application/json");
             postRequest.setEntity(input);
             HttpResponse response = httpClient.execute(postRequest);
             jsonString = EntityUtils.toString(response.getEntity());
-            System.out.println(jsonString);
+            System.out.println(jsonString); //test to ensure complete raw data is being returned
             JSONObject json = new JSONObject(jsonString);
 
             JSONArray series = json.getJSONObject("Results").getJSONArray("series");
 
-            for (int i = 0; i < series.length(); i++) {
+            for (int i = 0; i < series.length(); i++) {  //checks each data series being pulled
                 JSONArray data = series.getJSONObject(i).getJSONArray("data");
                 String output = data.getJSONObject(0).getString("value");
-                userdata[i] = Integer.parseInt(output)/12;
-                System.out.println(userdata[i]);
+                userdata[i] = Integer.parseInt(output)/12; // raw data is annual average so we divide by 12 to make it a monthly average
+
+                System.out.println(userdata[i]); //test to verify specific
             }
-            userdata[10] = 189;
-            userdata[11] = 0;
+            userdata[10] = 189; //national average CC payment per google search...no data was available on BLS
+            userdata[11] = 0;  //represents misc. debt... set to 0 since it'll be different for everyone
 
         } catch (IOException e) {
             e.printStackTrace();
