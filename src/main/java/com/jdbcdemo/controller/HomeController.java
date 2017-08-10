@@ -117,20 +117,23 @@ public class HomeController {
         }
 
         @RequestMapping("/userhome")
-        public String userHome (@RequestParam("th_savings") int savings,
+        public String userHome (Model model, @RequestParam("th_savings") int savings,
                                 @RequestParam("th_income") int income,
-                                @RequestParam("rent") int rent,
-                                @RequestParam("utils") int utils,@RequestParam("gas") int gas, @RequestParam("c_insurance")
-                                               int c_ins,@RequestParam("c_bill") int c_bill,@RequestParam("groceries")
-                                                int groceries,@RequestParam("restaurant") int rest,@RequestParam("creditCard") int cCard,
-                                @RequestParam("s_loans") int s_loans,@RequestParam("o_debt") int o_debt,@RequestParam("o_expense")
-                                               int o_exp,@RequestParam("meds") int meds,
-                                @RequestParam("clientId") int client_id, Model model) {
+                                @RequestParam("rent") int rent, @RequestParam("utils") int utils,
+                                @RequestParam("gas") int gas, @RequestParam("c_insurance") int c_ins,
+                                @RequestParam("c_bill") int c_bill, @RequestParam("groceries") int groceries,
+                                @RequestParam("restaurant") int rest,@RequestParam("creditCard") int cCard,
+                                @RequestParam("s_loans") int s_loans,@RequestParam("o_debt") int o_debt,
+                                @RequestParam("o_expense") int o_exp,@RequestParam("meds") int meds,
+                                @RequestParam("clientId") int client_id){
 
-            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-            SessionFactory sessionFact = cfg.buildSessionFactory();
-            Session session = sessionFact.openSession();
-            Transaction tx = session.beginTransaction();
+
+    Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+    SessionFactory sessionFact = cfg.buildSessionFactory();
+    Session session = sessionFact.openSession();
+    Transaction tx = session.beginTransaction();
+
+
 
             //This will add up the information from each section and send the totals to the DB.
 
@@ -154,7 +157,7 @@ public class HomeController {
             session.close();
 
 
-            int[]arrayList = TimeLeft.getTimeLeft();
+            int[]arrayList = TimeLeft.getTimeLeft(client_id); //HardCode
 
             //populates financial form with Midwest averages
             model.addAttribute("months",arrayList[0]);

@@ -1,5 +1,7 @@
 package com.jdbcdemo;
 
+import com.fp.dao.DAOFactory;
+import com.fp.dao.FinancesDAO;
 import com.fp.models.Finances;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,39 +13,36 @@ import org.hibernate.cfg.Configuration;
  */
 public class TimeLeft {
 
-    public static Finances newFinances(){
-        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-        SessionFactory sessionFact = cfg.buildSessionFactory();
-        Session session = sessionFact.openSession();
-        Transaction tx = session.beginTransaction();
 
-        //value of savings from database
-        Finances newFinances = new Finances();
-        return newFinances;
-    }
+    public static int getAssets(int client_id){
 
-    public static int getAssets(){
-
-        int savings = newFinances().getSavings();
+        FinancesDAO financesDAO = DAOFactory.getinstance(DAOFactory.FINANCES_DAO);
+        Finances newfinances = financesDAO.getFinancesInfoByClientId(client_id);
+        int savings = newfinances.getSavings();
         return savings;
     }
-    public static int getLiabilities(){
+    public static int getLiabilities(int client_id){
 
         //housing, trans, extras, food, debt,
 
-        int liabilities = newFinances().getHousing() + newFinances().getTransporation() + newFinances().getExtras() + newFinances().getFood() + newFinances().getDebt();
+        FinancesDAO financesDAO = DAOFactory.getinstance(DAOFactory.FINANCES_DAO);
+        Finances newFinances = financesDAO.getFinancesInfoByClientId(client_id);
+        int liabilities = newFinances.getHousing() + newFinances.getTransporation() + newFinances.getExtras() + newFinances.getFood() + newFinances.getDebt();
         return liabilities;
     }
-    public static int monthlyIncome(){
+    public static int monthlyIncome(int client_id){
+
+        FinancesDAO financesDAO = DAOFactory.getinstance(DAOFactory.FINANCES_DAO);
+        Finances newFinances = financesDAO.getFinancesInfoByClientId(client_id);
         //value of monthly income from database
-        int income = newFinances().getIncome();
+        int income = newFinances.getIncome();
         return income;
     }
 
-    public static int[] getTimeLeft() {
+    public static int[] getTimeLeft(int client_id) {
         {
-            int asset = getAssets();
-            int liability = getLiabilities();
+            int asset = getAssets(client_id);
+            int liability = getLiabilities(client_id);
 
             int[] daysleft = new int[4];
             //set months
@@ -51,7 +50,7 @@ public class TimeLeft {
             while (asset >= liability) {
                 month++;
                 asset -= liability;
-                asset += monthlyIncome();
+                asset += monthlyIncome(client_id);
             }
             int days = 0;
 
@@ -59,7 +58,7 @@ public class TimeLeft {
             while (asset >= liability) {
                 days++;
                 asset -= liability;
-                asset += (monthlyIncome() / 30);
+                asset += (monthlyIncome(client_id) / 30);
             }
             int hours = 0;
             liability = liability / 24;
