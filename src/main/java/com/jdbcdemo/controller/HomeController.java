@@ -4,6 +4,7 @@ package com.jdbcdemo.controller;
  * Created by Travis Brindley on 7/21/2017.
  */
 import com.fp.models.Clients;
+import com.fp.models.Finances;
 import com.jdbcdemo.BoLS;
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.hibernate.*;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -111,6 +113,36 @@ public class HomeController {
                                 @RequestParam("s_loans") int s_loans,@RequestParam("o_debt") int o_debt,@RequestParam("o_expense")
                                                int o_exp,@RequestParam("meds") int meds, Model model) {
 
+            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+            SessionFactory sessionFact = cfg.buildSessionFactory();
+            Session session = sessionFact.openSession();
+            Transaction tx = session.beginTransaction();
+
+            //This will add up the information from each section and send the totals to the DB.
+            
+            int housing = rent+utils+gas;
+            int trans = c_ins+c_bill;
+            int extras = o_exp + meds;
+            int food = groceries + rest;
+            int debt = cCard + s_loans + o_debt;
+
+            Finances newFinances = new Finances();
+            newFinances.setSavings(savings);
+            newFinances.setIncome(income);
+            newFinances.setHousing(housing);
+            newFinances.setTransporation(trans);
+            newFinances.setExtras(extras);
+            newFinances.setFood(food);
+            newFinances.setDebt(debt);
+
+            session.save(newFinances);
+            tx.commit();
+            session.close();
+
+            model.addAttribute("newStuff", newFinances);
+
+            ArrayList<String> list = new ArrayList<String>();
+            model.addAttribute("dbResult", list);
                 model.addAttribute("th_savings",savings);
                 model.addAttribute("th_income", income);
                 model.addAttribute("rent", rent);
