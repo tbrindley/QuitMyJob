@@ -29,5 +29,9 @@
         <property name="debt">
             <column name="debt" sql-type="int(11)"/>
         </property>
+        <property name="clientid">
+            <column name="client_id" sql-type="int(10)"/>
+        </property>
+
     </class>
 </hibernate-mapping>

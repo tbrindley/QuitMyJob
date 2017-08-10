@@ -5,8 +5,8 @@
 <hibernate-mapping>
 
     <class name="com.fp.models.Clients" table="clients" schema="quitmyjob">
-        <id name="clientId">
-            <column name="client_id" sql-type="int(10) unsigned"/>
+        <id name="clientId" type = "int" column="client_id">
+            <generator class="native"/>
         </id>
         <property name="userId">
             <column name="user_id" sql-type="varchar(45)" length="45"/>
@@ -19,9 +19,7 @@
         </property>
         <property name="job">
             <column name="job" sql-type="varchar(45)" length="45" not-null="true"/>
-        </property>
-        <property name="finId">
-            <column name="fin_id" sql-type="varchar(45)" length="45" not-null="true"/>
+
         </property>
     </class>
 </hibernate-mapping>

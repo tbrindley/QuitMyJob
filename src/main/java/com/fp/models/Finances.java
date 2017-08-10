@@ -18,6 +18,7 @@ public class Finances {
     private int extras;
     private int food;
     private int debt;
+    private int clientid;
 
     @Id
     @Column(name = "fin_id", nullable = false)
@@ -97,6 +98,16 @@ public class Finances {
 
     public void setDebt(int debt) {
         this.debt = debt;
+    }
+
+    @Basic
+    @Column(name = "client_id", nullable = false)
+    public int getClientid() {
+        return clientid;
+    }
+
+    public void setClientid(int clientid) {
+        this.clientid = clientid;
     }
 
     @Override

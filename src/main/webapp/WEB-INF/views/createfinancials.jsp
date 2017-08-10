@@ -17,6 +17,7 @@
 <br>
 <br>
 <form action="/userhome">
+    <input type="hidden" name="clientId" value = "${clientid}"/>
     <FIELDSET>
         <LEGEND>Your Assets and Monthly Income</LEGEND>
         <label>

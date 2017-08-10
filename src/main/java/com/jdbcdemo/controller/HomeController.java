@@ -55,11 +55,12 @@ public class HomeController {
         newClient.setUserId(userName);
         newClient.setJob(career);
 
-        session.save(newClient);
+        Integer clientId = (Integer) session.save(newClient);
         tx.commit();
         session.close();
 
         model.addAttribute("newStuff", newClient);
+        model.addAttribute("clientid", clientId);
 
         ArrayList<String> list = new ArrayList<String>();
         model.addAttribute("dbResult", list);
@@ -111,7 +112,8 @@ public class HomeController {
                                                int c_ins,@RequestParam("c_bill") int c_bill,@RequestParam("groceries")
                                                 int groceries,@RequestParam("restaurant") int rest,@RequestParam("creditCard") int cCard,
                                 @RequestParam("s_loans") int s_loans,@RequestParam("o_debt") int o_debt,@RequestParam("o_expense")
-                                               int o_exp,@RequestParam("meds") int meds, Model model) {
+                                               int o_exp,@RequestParam("meds") int meds,
+                                @RequestParam("clientId") int client_id, Model model) {
 
             Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
             SessionFactory sessionFact = cfg.buildSessionFactory();
@@ -119,7 +121,7 @@ public class HomeController {
             Transaction tx = session.beginTransaction();
 
             //This will add up the information from each section and send the totals to the DB.
-            
+
             int housing = rent+utils+gas;
             int trans = c_ins+c_bill;
             int extras = o_exp + meds;
@@ -134,7 +136,7 @@ public class HomeController {
             newFinances.setExtras(extras);
             newFinances.setFood(food);
             newFinances.setDebt(debt);
-
+            newFinances.setClientid(client_id);
             session.save(newFinances);
             tx.commit();
             session.close();
