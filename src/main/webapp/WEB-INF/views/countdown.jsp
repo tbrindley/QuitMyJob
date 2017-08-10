@@ -17,9 +17,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <link rel="stylesheet" type="text/css" href="../../webresources/css/style.css">
     <title>Quit My Job</title>
     <meta charset="UTF-8">
+
+    <title>Countdown Clock</title>
+
 </head>
 <body>
 <div id="test" style="text-align: center; padding-top: 10%; font-size: 44px;">
@@ -63,7 +67,7 @@
         if(mon >= 3){
             document.getElementById("test").style.backgroundColor="green";
         }
-        else if(mon == 2){
+        else if(mon === 2){
             document.getElementById("test").style.backgroundColor="yellow";
         }
         else{
