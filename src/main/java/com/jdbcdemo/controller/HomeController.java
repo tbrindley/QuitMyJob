@@ -6,6 +6,7 @@ package com.jdbcdemo.controller;
 import com.fp.models.Clients;
 import com.fp.models.Finances;
 import com.jdbcdemo.BoLS;
+import com.jdbcdemo.TimeLeft;
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -141,6 +142,17 @@ public class HomeController {
             tx.commit();
             session.close();
 
+
+            int[]arrayList = TimeLeft.getTimeLeft();
+
+            //populates financial form with Midwest averages
+            model.addAttribute("months",arrayList[0]);
+            model.addAttribute("days",arrayList[1]);
+            model.addAttribute("hours",arrayList[2]);
+            model.addAttribute("min",arrayList[3]);
+
+/*
+
             model.addAttribute("newStuff", newFinances);
 
             ArrayList<String> list = new ArrayList<String>();
@@ -159,6 +171,7 @@ public class HomeController {
                 model.addAttribute("o_debt",o_debt);
                 model.addAttribute("o_expense", o_exp);
                 model.addAttribute("meds", meds);
+*/
 
             return "countdown";
         }
