@@ -117,8 +117,8 @@ public class HomeController {
                     }
                 }
             }
-/*            tx.commit();
-            session.close();*/
+           tx.commit();
+            session.close();
 
         return "index";
 
