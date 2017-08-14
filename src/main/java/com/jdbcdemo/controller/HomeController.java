@@ -254,5 +254,26 @@ public class HomeController {
             return "jobsearch";
         }
 
+        @RequestMapping("/quit")
+        public String quitMyJob(){
+            return "quitmyjob";
+        }
+
+        @RequestMapping("/quitmyjob")
+    public String iQuit(Model model, @RequestParam("companyName") String companyName, @RequestParam("companyAddress") String companyAddress,
+                        @RequestParam("companyZip") String companyZip,@RequestParam("companyState") String state,@RequestParam("boss") String boss,
+                        @RequestParam("userFullName") String fullName,@RequestParam("position") String position,@RequestParam("lastDay") String lastDay,
+                        @RequestParam("city") String city){
+        model.addAttribute("company", companyName);
+        model.addAttribute("address",companyAddress);
+        model.addAttribute("city",city);
+        model.addAttribute("state",state);
+        model.addAttribute("zip",companyZip);
+        model.addAttribute("boss",boss);
+        model.addAttribute("position",position);
+        model.addAttribute("lastDay",lastDay);
+        model.addAttribute("fullName",fullName);
+        return "letter";
+    }
     }
 
