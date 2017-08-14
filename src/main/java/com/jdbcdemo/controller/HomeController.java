@@ -9,6 +9,7 @@ import com.fp.models.Clients;
 import com.fp.models.Finances;
 import com.jdbcdemo.BoLS;
 import com.jdbcdemo.TimeLeft;
+import com.jdbcdemo.util.HibernateUtil;
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 @Controller
 public class HomeController {
 
+
+
     @RequestMapping("/")
     public String homePage(){
         return "index";
@@ -48,9 +51,10 @@ public class HomeController {
                                             @RequestParam("psw") String pswd,
                                             @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException {
 
-        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-        SessionFactory sessionFact = cfg.buildSessionFactory();
-        Session session = sessionFact.openSession();
+        /*Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+        SessionFactory sessionFact = cfg.buildSessionFactory();*/
+        Session session = HibernateUtil.getSessionFactory().openSession(); // sessionFact.openSession();
+        System.out.println(session);
         Transaction tx = session.beginTransaction();
 
         Clients newClient = new Clients();
@@ -61,7 +65,7 @@ public class HomeController {
 
         Integer clientId = (Integer) session.save(newClient);
         tx.commit();
-        session.close();
+//        session.close();
 
         model.addAttribute("newStuff", newClient);
         model.addAttribute("clientid", clientId);
@@ -91,9 +95,11 @@ public class HomeController {
     public String login (Model model, @RequestParam("userName")String username, @RequestParam("password") String password){
         //authenticate user
 
-            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-            SessionFactory sessionFact = cfg.buildSessionFactory();
-            Session session = sessionFact.openSession();
+//            Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+//            SessionFactory sessionFact = cfg.buildSessionFactory();
+//            Session session = sessionFact.openSession();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        System.out.println(session);
             Transaction tx = session.beginTransaction();
 
             Criteria crit = session.createCriteria(Clients.class);
@@ -105,7 +111,7 @@ public class HomeController {
                         int client_id = tempClient.getClientId();
                         //user authenticated now pull data from DB
 
-                        int[]arrayList = TimeLeft.getTimeLeft(client_id); //HardCode
+                        int[]arrayList = TimeLeft.getTimeLeft(client_id);
 
                         //populates financial form with Midwest averages
                         model.addAttribute("months",arrayList[0]);
@@ -118,7 +124,7 @@ public class HomeController {
                 }
             }
            tx.commit();
-            session.close();
+          // session.close();
 
         return "index";
 
@@ -157,10 +163,12 @@ public class HomeController {
                                 @RequestParam("clientId") int client_id){
 
 
-    Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-    SessionFactory sessionFact = cfg.buildSessionFactory();
-    Session session = sessionFact.openSession();
-    Transaction tx = session.beginTransaction();
+//    Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+//    SessionFactory sessionFact = cfg.buildSessionFactory();
+//    Session session = sessionFact.openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            System.out.println(session);
+            Transaction tx = session.beginTransaction();
 
 
 
@@ -186,7 +194,7 @@ public class HomeController {
             session.close();
 
 
-            int[]arrayList = TimeLeft.getTimeLeft(client_id); //HardCode
+            int[]arrayList = TimeLeft.getTimeLeft(client_id);
 
             //populates financial form with Midwest averages
             model.addAttribute("months",arrayList[0]);
