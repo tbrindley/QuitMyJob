@@ -1,6 +1,7 @@
 package com.fp.dao;
 
 import com.fp.models.Finances;
+import com.jdbcdemo.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,11 +16,17 @@ import java.util.ArrayList;
  * Created by jayme on 8/10/2017.
  */
 public class FinancesDaoImpl implements FinancesDAO {
+    private static SessionFactory sessionFactory;
+
+    public FinancesDaoImpl() {
+        sessionFactory = HibernateUtil.getSessionFactory();
+    }
+
     public Finances getFinancesInfoByClientId(int client_id) {
 
-        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
-        SessionFactory sessionFact = cfg.buildSessionFactory();
-        Session session = sessionFact.openSession();
+//        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+//        SessionFactory sessionFact = cfg.buildSessionFactory();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
         Criteria crit = session.createCriteria(Finances.class);
@@ -28,7 +35,7 @@ public class FinancesDaoImpl implements FinancesDAO {
 
 
         tx.commit();
-        session.close();
+        //session.close();
         return list.get(0);
     }
 }

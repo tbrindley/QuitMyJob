@@ -191,7 +191,7 @@ public class HomeController {
             newFinances.setClientid(client_id);
             session.save(newFinances);
             tx.commit();
-            session.close();
+            //session.close();
 
 
             int[]arrayList = TimeLeft.getTimeLeft(client_id);

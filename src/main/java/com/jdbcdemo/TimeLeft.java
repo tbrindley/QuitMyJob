@@ -68,12 +68,11 @@ public class TimeLeft {
                 asset -= liability;
             }
             int min = 0;
-            liability = liability / 60;
-
-            while (asset > liability) {
-                min++;
-                asset -= liability;
-            }
+//            liability = liability / 60;
+//            while (asset >= liability) {
+//                min++;
+//                asset -= liability;
+//            }
 
             daysleft[0] = month;
             daysleft[1] = days;
