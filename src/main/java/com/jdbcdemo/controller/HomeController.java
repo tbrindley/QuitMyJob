@@ -64,7 +64,7 @@ public class HomeController {
 
         Clients newClient = new Clients();
         newClient.setEmail(Email);
-        newClient.setPassword(Password.hashAndSalt(pswd));
+        newClient.setPassword(Password.MD5(pswd));
         newClient.setUserId(userName);
         newClient.setJob(career);
 
@@ -100,7 +100,8 @@ public class HomeController {
     @RequestMapping("/login")
     public String login(Model model, @RequestParam("userName") String username, @RequestParam("password") String password, HttpServletResponse response) {
 
-        int client_id = LoginServlet.getClient(username, password,response);
+        String encodedpwd= Password.MD5(password);
+        int client_id = LoginServlet.getClient(username, encodedpwd,response);
 
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
 

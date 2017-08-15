@@ -31,6 +31,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 <body>
 
@@ -65,21 +66,21 @@
     </div>
     <div class="jumbotron">
 
-        <form method = "post" action ="/addUserFinancials">
+        <form method = "post" action ="/addUserFinancials" onsubmit= "return functionValidate();">
 
             <label><b>User Name:</b></label>
             <br>
-            <input type ="text" placeholder ="Enter a username" name ="user_id" class="form-control" required>
+            <input type ="text" placeholder ="Enter a username" name ="user_id" class="form-control" required onchange="return formValidation();">
             <br>
             <br>
             <label><b>Email:</b></label>
             <br>
-            <input type ="email" placeholder ="Enter an Email" name ="email" class="form-control" required>
+            <input type ="email" placeholder ="Enter an Email" name ="email" class="form-control" required onchange="return formValidation();">
             <br>
             <br>
             <label><b>Password:</b></label>
             <br>
-            <input type ="password" placeholder ="Enter a password" name ="psw" class="form-control"required >
+            <input type ="password" placeholder ="Enter a password" name ="psw" class="form-control" required onchange="return formValidation();">
             <br>
             <br>
             <label><b>Repeat Password:</b></label>
