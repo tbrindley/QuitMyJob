@@ -66,7 +66,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Countdown Clock</a></li>
+                <li class="active"><a href="/countdownclock">Countdown Clock</a></li>
                 <li><a href="/jobsearch">Job Hunt</a></li>
                 <li><a href="/quit">Resignation Letter</a></li>
 

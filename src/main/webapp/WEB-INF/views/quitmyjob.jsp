@@ -49,7 +49,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/userhome">Countdown Clock</a></li>
+                <li><a href="/countdownclock">Countdown Clock</a></li>
                 <li><a href="/jobsearch">Job Hunt</a></li>
                 <li class="active"><a href="/quit">Resignation Letter</a></li>
 

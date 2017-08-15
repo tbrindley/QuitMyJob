@@ -16,24 +16,21 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <style>
-        .bad{background-image:url(../../webresources/img/firebackground.gif);
-            background-size: cover;
-            background-position: center;
-            border: solid 2px red;
-            color:yellow;}
-        .ok{background-image:url(../../webresources/img/kermit.gif);
-            background-size:cover;
-            background-position: 15%;
-            border: solid 2px yellow;
-            color: yellow;}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="../../webresources/js/IndeedSearch.js"></script>
 
-        .good{background-image:url(../../webresources/img/happybackground.jpg);
-            background-size: cover;
-            border: solid 2px green;
-            color: lime;}
+    <script type="text/javascript">
+        var indeed_client = new Indeed("2945076701195809");
+        indeed_client.search({
+            q: 'cook',
+            l: 'detroit',
+            userip: '1.2.3.4',
+            useragent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2)',
+        }, function(search_response){
+            //render the jobs from the search_response
+        });
+    </script>
 
-    </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -58,7 +55,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Countdown Clock</a></li>
+                <li><a href="/countdownclock">Countdown Clock</a></li>
                 <li class="active"><a href="/jobsearch">Job Hunt</a></li>
                 <li><a href="/quit">Resignation Letter</a></li>
 
@@ -86,7 +83,14 @@
         </Center>
     </div>
     <div class="jumbotron" id="test" style="padding-top: 6%; text-align: center; font-size: 54px">
-        Job Search
+        <input class="jobname" id="jobname" type="text" value="" name="jobname">
+        <input class="location" id="location" type="text" value="" name="location">
+        <input type="submit" id="searchResult" value="Find Jobs" class="">
+        <!—Job result element -->
+        <div id="jobs-data"></div>
+        <div style="clear:both;"></div>
+        <!—Pagination element -->
+        <div id="pagination"></div>
     </div>
 
     <div class="row">
