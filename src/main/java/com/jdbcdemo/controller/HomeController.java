@@ -26,6 +26,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.hibernate.*;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class HomeController {
     public String addUserFinancials(@RequestParam("user_id") String userName,
                                             @RequestParam("email") String Email,
                                             @RequestParam("psw") String pswd,
-                                            @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException {
+                                            @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException, NoSuchProviderException, NoSuchAlgorithmException {
 
         /*Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
         SessionFactory sessionFact = cfg.buildSessionFactory();*/
@@ -59,7 +61,7 @@ public class HomeController {
 
         Clients newClient = new Clients();
         newClient.setEmail(Email);
-        newClient.setPassword(pswd);
+        newClient.setPassword(Password.hashAndSalt(pswd));
         newClient.setUserId(userName);
         newClient.setJob(career);
 
