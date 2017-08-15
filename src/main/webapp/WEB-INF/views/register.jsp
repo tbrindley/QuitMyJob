@@ -66,21 +66,21 @@
     </div>
     <div class="jumbotron">
 
-        <form method = "post" action ="/addUserFinancials" onsubmit= "return functionValidate();">
+        <form method = "post" action ="/addUserFinancials">
 
             <label><b>User Name:</b></label>
             <br>
-            <input type ="text" placeholder ="Enter a username" name ="user_id" class="form-control" required onchange="return formValidation();">
+            <input type ="text" placeholder ="Enter a username" name ="user_id" class="form-control" required>
             <br>
             <br>
             <label><b>Email:</b></label>
             <br>
-            <input type ="email" placeholder ="Enter an Email" name ="email" class="form-control" required onchange="return formValidation();">
+            <input type ="email" placeholder ="Enter an Email" name ="email" class="form-control" required>
             <br>
             <br>
             <label><b>Password:</b></label>
             <br>
-            <input type ="password" placeholder ="Enter a password" name ="psw" class="form-control" required onchange="return formValidation();">
+            <input type ="password" placeholder ="Enter a password" name ="psw" class="form-control" required>
             <br>
             <br>
             <label><b>Repeat Password:</b></label>
