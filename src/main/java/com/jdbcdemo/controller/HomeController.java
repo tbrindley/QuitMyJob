@@ -51,10 +51,10 @@ public class HomeController {
     @RequestMapping("/addUserFinancials")
     //adds registration info. to DB
     public String addUserFinancials(@RequestParam("user_id") String userName,
-
-                                            @RequestParam("email") String Email,
+                               @RequestParam("email") String Email,
                                             @RequestParam("psw") String pswd,
                                             @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException, NoSuchProviderException, NoSuchAlgorithmException {
+
 
         /*Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
         SessionFactory sessionFact = cfg.buildSessionFactory();*/
@@ -100,8 +100,7 @@ public class HomeController {
     @RequestMapping("/login")
     public String login(Model model, @RequestParam("userName") String username, @RequestParam("password") String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
 
-        String encodedpwd= Password.MD5(password);
-        int client_id = LoginServlet.getClient(username, encodedpwd,response);
+        int client_id = LoginServlet.getClient(username, password,response);
 
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
@@ -200,7 +199,8 @@ public class HomeController {
                 System.out.println(client);
                 int client_id = Integer.parseInt(client);
 
-                return "createfinancials";
+
+                return "update";
             }
             else{
                 return "index";
@@ -286,10 +286,5 @@ public class HomeController {
             return "index";
         }
 
-    }
-    @RequestMapping("/logout")
-    public String logout(){
-        String page = logout();
-        return page;
     }
 }

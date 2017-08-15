@@ -28,7 +28,7 @@ public class LoginServlet {
         for (int i = 0; i < list.size(); i++) {
             Clients tempClient = list.get(i);
             if (username.equalsIgnoreCase(tempClient.getUserId())) {
-                String securePassword = Password.hashAndSalt(password);
+                String securePassword = Password.MD5(password);
                 System.out.println(securePassword);
                 if (securePassword.equals(tempClient.getPassword())) {
                     client_id = tempClient.getClientId();

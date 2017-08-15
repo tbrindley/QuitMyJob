@@ -87,11 +87,16 @@
             <br>
             <input type ="password" placeholder ="confirm password" name ="psw-repeat" class="form-control" required>
             <br>
-
             <br>
             <label><b>Current job:</b></label>
             <br>
             <input type ="text" placeholder ="Current Job" name ="curjob" class="form-control" required >
+            <br>
+            <br>
+            <label><b>City:</b></label>
+            <br>
+            <input type ="text" placeholder ="City" name ="city" class="form-control" required >
+            <br>
             <br>
             <button type ="submit" class="signupbtn" style="color:black">Sign Up</button>
 
