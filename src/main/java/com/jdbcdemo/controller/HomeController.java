@@ -18,14 +18,23 @@ import org.apache.http.client.protocol.RequestAddCookies;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 
 import java.math.BigDecimal;
@@ -51,9 +60,11 @@ public class HomeController {
     @RequestMapping("/addUserFinancials")
     //adds registration info. to DB
     public String addUserFinancials(@RequestParam("user_id") String userName,
+
                                @RequestParam("email") String Email,
                                             @RequestParam("psw") String pswd,
                                             @RequestParam("curjob") String career, Model model) throws ClassNotFoundException, SQLException, NoSuchProviderException, NoSuchAlgorithmException {
+
 
 
         /*Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
@@ -100,7 +111,9 @@ public class HomeController {
     @RequestMapping("/login")
     public String login(Model model, @RequestParam("userName") String username, @RequestParam("password") String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
 
-        int client_id = LoginServlet.getClient(username, password,response);
+        String encodedpwd = Password.MD5(password);
+        int client_id = LoginServlet.getClient(username, encodedpwd, response);
+
 
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
@@ -191,13 +204,13 @@ public class HomeController {
 
     @RequestMapping("/updateuser")
     public String updateUser(HttpServletRequest request) {
-            boolean loggedin = CheckCookie.checkCookie(request);
-            if (loggedin) {
-                Cookie[] cookies = request.getCookies();
+        boolean loggedin = CheckCookie.checkCookie(request);
+        if (loggedin) {
+            Cookie[] cookies = request.getCookies();
 
-                String client = cookies[0].getValue();
-                System.out.println(client);
-                int client_id = Integer.parseInt(client);
+            String client = cookies[0].getValue();
+            System.out.println(client);
+            int client_id = Integer.parseInt(client);
 
 
                 return "update";
@@ -205,8 +218,8 @@ public class HomeController {
             else{
                 return "index";
             }
-    }
-
+        }
+    
     @RequestMapping("/breakdown")
     public String userBreakdown() {
 
@@ -214,19 +227,75 @@ public class HomeController {
     }
 
     @RequestMapping("/jobsearch")
-    public String jobSearch() {
+    public ModelAndView getIndeed(Model model) {
+        String jsonString = callURL("http://api.indeed.com/ads/apisearch?publisher=2945076701195809&q=java&l=detroit&format=json&sort=&radius=&st=&jt=&start=&limit=50&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2");
+        System.out.println("\n\njsonString: " + jsonString);
 
-        //the HTTPClient Interface represents the contract for the HTTP Request execution
-        HttpClient http = HttpClientBuilder.create().build();
+// Replace this try catch block for all below subsequent examples
+        try {
+            JSONObject jsonObject = new JSONObject(jsonString);
+            JSONArray jsonArray = jsonObject.getJSONArray("results");
+            int count = jsonArray.length(); // get totalCount of all jsonObjects
+            for (int i = 0; i < count; i++) {   // iterate through jsonArray
+                JSONObject jsonPosts = jsonArray.getJSONObject(i);  // get jsonObject @ i position
+                System.out.println("jsonObject " + i + ": " + jsonPosts.get("jobtitle"));
+                System.out.println(("jsonObject " + i + ": " + jsonPosts.get("company")));
+                System.out.println();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        //String to hold data for our loop once we return the json array
+        String text = "";
+        String text2 = "";
+        JSONObject jsonObject = new JSONObject(jsonString);
+        JSONArray jsonArray = jsonObject.getJSONArray("results");
+        jsonArray.toString();
 
-        HttpHost host = new HttpHost("forecast.weather.gov", 80, "http");
+        //create a json array to hold the data in the "text" array node
+        //also
+        JSONArray ar = jsonObject.getJSONArray("results");
 
-        // HttpGet retrieves the info identified by the request URI (in the form of an entity)
-        HttpGet getPage = new HttpGet("/MapClick.php?lat=42.331427&lon=-83.045754&FcstType=json");
 
+        //loop through json array
+        for (int i = 0; i < ar.length(); i++) {
+            text += ("<h6>" + ar.getJSONObject(i).getString("jobtitle") + "</h6>" + "<h6>" + ar.getJSONObject(i).getString("company") + "</h6>" + "<h6>" + ar.getJSONObject(i).getString("url") + "</h6>");
 
-        return "jobsearch";
+        }
+        model.addAttribute("jSonArray", text);
+        return new ModelAndView("indeedJson", "message", jsonArray);
     }
+
+    public static String callURL(String myURL) {
+        System.out.println("Requested URL:" + myURL);
+        StringBuilder sb = new StringBuilder();
+        URLConnection urlConn = null;
+        InputStreamReader in = null;
+        try {
+            URL url = new URL(myURL);
+            urlConn = url.openConnection();
+            if (urlConn != null)
+                urlConn.setReadTimeout(60 * 1000);
+            if (urlConn != null && urlConn.getInputStream() != null) {
+                in = new InputStreamReader(urlConn.getInputStream(),
+                        Charset.defaultCharset());
+                BufferedReader bufferedReader = new BufferedReader(in);
+                if (bufferedReader != null) {
+                    int cp;
+                    while ((cp = bufferedReader.read()) != -1) {
+                        sb.append((char) cp);
+                    }
+                    bufferedReader.close();
+                }
+            }
+            in.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Exception while calling URL:" + myURL, e);
+        }
+
+        return sb.toString();
+    }
+
 
     @RequestMapping("/quit")
     public String quitMyJob(HttpServletRequest request) {
@@ -239,8 +308,7 @@ public class HomeController {
             int client_id = Integer.parseInt(client);
 
             return "quitmyjob";
-        }
-        else{
+        } else {
             return "index";
         }
     }
@@ -286,5 +354,11 @@ public class HomeController {
             return "index";
         }
 
+    }
+
+    @RequestMapping("/logout")
+    public String logout() {
+        String page = logout();
+        return page;
     }
 }
