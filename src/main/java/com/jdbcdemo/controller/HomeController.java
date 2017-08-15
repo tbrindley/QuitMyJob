@@ -200,7 +200,7 @@ public class HomeController {
                 System.out.println(client);
                 int client_id = Integer.parseInt(client);
 
-                return "update";
+                return "createfinancials";
             }
             else{
                 return "index";
