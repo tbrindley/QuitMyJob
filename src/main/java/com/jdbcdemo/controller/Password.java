@@ -1,10 +1,19 @@
 package com.jdbcdemo.controller;
 
 
+import com.fp.models.Clients;
+import com.jdbcdemo.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 
 /**
  * Created by jayme on 8/15/2017.
@@ -12,10 +21,10 @@ import java.security.SecureRandom;
 
 public class Password {
     public static String hashAndSalt(String password) throws NoSuchAlgorithmException, NoSuchProviderException {
-        String passwordToHash = "password";
+        //String passwordToHash = "password";
         byte[] salt = getSalt();
 
-        String securePassword = getSecurePassword(passwordToHash, salt);
+        String securePassword = getSecurePassword(password, salt);
         //System.out.println(securePassword); //Prints 83ee5baeea20b6c21635e4ea67847f66
 
         //String regeneratedPasswordToVerify = getSecurePassword(passwordToHash, salt);
