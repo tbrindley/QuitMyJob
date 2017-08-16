@@ -1,7 +1,6 @@
 package com.jdbcdemo.loginsystem;
 
 import com.fp.models.Clients;
-import com.jdbcdemo.controller.Password;
 import com.jdbcdemo.util.HibernateUtil;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
@@ -25,25 +24,25 @@ public class LoginServlet {
         Transaction tx = session.beginTransaction();
 
         Criteria crit = session.createCriteria(Clients.class);
-        //crit.add(Restrictions.like("user_id",username));
+        crit.add(Restrictions.eq("userId",username));
 
-        ArrayList<Clients> list = (ArrayList<Clients>) crit.list();
-        for (int i = 0; i < list.size(); i++) {
-            Clients tempClient = list.get(i);
-            if (username.equalsIgnoreCase(tempClient.getUserId())) {
-
-                String securePassword = Password.MD5(password);
-                System.out.println("Secure Password: " + securePassword);
-                System.out.println("object password: " + tempClient.getPassword());
-
-                if (securePassword.equals(tempClient.getPassword())) {
-                    int client_id = tempClient.getClientId();
-                    Cookie userCookie = new Cookie("userId", Integer.toString(client_id));
-                    userCookie.setMaxAge(24 * 60 * 60); //sets the cookie for 1 day
-                    response.addCookie(userCookie);
-                    //user authenticated now pull data from DB
-                    directPage = "countdown";
-                }
+        //ArrayList<Clients> list = (ArrayList<Clients>) crit.list();
+        Clients tempClient = (Clients) crit.uniqueResult();
+        if(tempClient == null){
+            directPage = "index";
+        }
+        else{
+            String securePassword = Password.MD5(password);
+            if (securePassword.equals(tempClient.getPassword())) {
+                int client_id = tempClient.getClientId();
+                Cookie userCookie = new Cookie("userId", Integer.toString(client_id));
+                userCookie.setMaxAge(24 * 60 * 60); //sets the cookie for 1 day
+                response.addCookie(userCookie);
+                //user authenticated now pull data from DB
+                directPage = "countdown";
+            }
+            else {
+                directPage = "index";
             }
         }
         return directPage;
