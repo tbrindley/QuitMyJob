@@ -1,4 +1,4 @@
-package com.jdbcdemo.controller;
+package com.jdbcdemo.loginsystem;
 
 /**
  * Created by jayme on 8/15/2017.*/

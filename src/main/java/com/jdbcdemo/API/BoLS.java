@@ -1,4 +1,4 @@
-package com.jdbcdemo;
+package com.jdbcdemo.API;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
