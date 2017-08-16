@@ -4,6 +4,7 @@ package com.jdbcdemo.controller;
  * Created by jayme on 8/15/2017.*/
 
 public class Password {
+
     public static String MD5(String md5) {
 
         try {

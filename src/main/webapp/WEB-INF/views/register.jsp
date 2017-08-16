@@ -70,6 +70,10 @@
 
 
         <form name="createUser" action ="/addUserFinancials" onsubmit="return validateUserCreation()" method = "post">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5a5ecaaf336ac85cd3f3e8d8db61f0878ba562c7
 
             <label><b>User Name:</b></label>
             <br>

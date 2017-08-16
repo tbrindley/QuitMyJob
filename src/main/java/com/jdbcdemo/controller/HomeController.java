@@ -112,9 +112,7 @@ public class HomeController {
     @RequestMapping("/login")
     public String login(Model model, @RequestParam("userName") String username, @RequestParam("password") String password, HttpServletResponse response, HttpServletRequest request) throws NoSuchProviderException, NoSuchAlgorithmException {
 
-
-        String encodedpwd = Password.MD5(password);
-        String reDirect = LoginServlet.login(username, encodedpwd, response);
+        String reDirect = LoginServlet.login(username, password, response);
 
         //calls the cookie for the user & gets their client_Id
         Cookie[] cookies = request.getCookies();
