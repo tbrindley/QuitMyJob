@@ -67,12 +67,10 @@
         </Center>
     </div>
     <div class="jumbotron">
+        
 
-<<<<<<< HEAD
-        <form method = "post" action ="/addUserFinancials" onsubmit="return validate()">
-=======
         <form name="createUser" action ="/addUserFinancials" onsubmit="return validateUserCreation()" method = "post">
->>>>>>> 8894579e1e1d4af78fe3bb2ca598f8b047863407
+
 
             <label><b>User Name:</b></label>
             <br>
