@@ -273,7 +273,7 @@ public class HomeController {
 
         }
         model.addAttribute("jSonArray", text);
-        return new ModelAndView("indeedJson", "message", jsonArray);
+        return new ModelAndView("jobsearch", "message", jsonArray);
     }
 
     public static String callURL(String myURL) {
