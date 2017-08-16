@@ -205,7 +205,7 @@
             <h1>Login to Your Account</h1><br>
 
 
-            <form name="login" action="/login" method="post" onsubmit="return validateLogin()">
+            <form name="login" action="/login" method="post" >
 
                 <input type="text" id="userName" name="userName" placeholder="Username" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
