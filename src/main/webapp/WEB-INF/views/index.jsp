@@ -132,6 +132,8 @@
     <!-- Theme CSS -->
     <link href="../../webresources/css/creative.min.css" rel="stylesheet">
 
+
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -139,6 +141,8 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <!-- validation Javasript -->
+    <script src="../../webresources/js/validation1.js"></script>
 </head>
 
 <body id="page-top">
@@ -200,7 +204,7 @@
         <div class="loginmodal-container">
             <h1>Login to Your Account</h1><br>
 
-            <form name="login" action="/login" onsubmit="return validate()" method="post">
+            <form name="login" action="/login" onsubmit="return validateLogin()" method="post">
                 <input type="text" id="userName" name="userName" placeholder="Username" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <input type="submit" name="login" class="login loginmodal-submit" value="Login">
@@ -217,6 +221,7 @@
 <!-- jQuery -->
 <script src="../../webresources/vendor/jquery/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
 <script src="../../webresources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
@@ -228,8 +233,7 @@
 <!-- Theme JavaScript -->
 <script src="../../webresources/js/creative.min.js"></script>
 
-<!-- validation Javasript -->
-<script src="../../webresources/js/validation.js"></script>
+
 
 </body>
 

@@ -31,6 +31,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!-- validation Javasript -->
+    <script src="../../webresources/js/validation1.js"></script>
 
 </head>
 <body>
@@ -66,7 +68,7 @@
     </div>
     <div class="jumbotron">
 
-        <form method = "post" action ="/addUserFinancials">
+        <form name="createUser" action ="/addUserFinancials" onsubmit="return validateUserCreation()" method = "post">
 
             <label><b>User Name:</b></label>
             <br>
