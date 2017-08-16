@@ -141,19 +141,19 @@
             if (mon >= 3) {
                 document.getElementById("test").classList.add("good");
                 document.getElementById("feedback").innerHTML = "<center><h1>Good News!!!!</h1></center>With at least three months of time before you " +
-                    "would be strapped for cash, feel free to quit that job!  Here is a link to some relevant jobs"
+                    "would be strapped for cash, feel free to quit that job!  <a href='/jobsearch'>Here</a> is a link to some relevant jobs"
             }
             else if (mon === 2) {
                 document.getElementById("test").classList.add("ok");
                 document.getElementById("feedback").innerHTML = "<center><h1>Sorry, we're not much help</h1></center>With at least two months of time before you " +
                     "would be strapped for cash, we feel you're on the bubble.  If you're the kind of person who likes to live on the edge," +
-                    "quit that job, otherwise, looks like you're going back.    Here is a link to some relevant jobs to help you dream"
+                    "quit that job, otherwise, looks like you're going back.    <a href='/jobsearch'>Here</a> is a link to some relevant jobs to help you dream"
             }
             else {
                 document.getElementById("test").classList.add("bad");
                 document.getElementById("feedback").innerHTML = "<center><h1>Heck No!!!!</h1></center>You can't even make it 2 months without a job " +
                     "without being strapped for cash.  Accounting for the slow moving nature of bureaucracy, leaving now would be a" +
-                    " very bad idea.  To help you dream,  here is a link to some relevant jobs"
+                    " very bad idea.  To help you dream,  <a href='/jobsearch'>Here</a> is a link to some relevant jobs"
             }
             // Output the result in an element with id="demo"
             document.getElementById("test").innerHTML = mon + " mon " + d + " days <br><span style='font-size: 34px'>" + h + " hrs "
