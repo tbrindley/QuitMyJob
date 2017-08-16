@@ -30,9 +30,11 @@ public class LoginServlet {
         for (int i = 0; i < list.size(); i++) {
             Clients tempClient = list.get(i);
             if (username.equalsIgnoreCase(tempClient.getUserId())) {
+
                 String securePassword = Password.MD5(password);
                 System.out.println("Secure Password: " + securePassword);
                 System.out.println("object password: " + tempClient.getPassword());
+                
                 if (securePassword.equals(tempClient.getPassword())) {
                     int client_id = tempClient.getClientId();
                     Cookie userCookie = new Cookie("userId", Integer.toString(client_id));
