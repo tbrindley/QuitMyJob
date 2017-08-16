@@ -17,9 +17,6 @@ import java.util.ArrayList;
  */
 public class LoginServlet {
 
-    public static int getClient(String username, String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
-        int client_id = 0;
-
     public static String login(String username, String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
         String directPage = "index";
 
@@ -39,7 +36,7 @@ public class LoginServlet {
                 if (securePassword.equals(tempClient.getPassword())) {
                     int client_id = tempClient.getClientId();
                     Cookie userCookie = new Cookie("userId", Integer.toString(client_id));
-                    userCookie.setMaxAge(24*60*60); //sets the cookie for 1 day
+                    userCookie.setMaxAge(24 * 60 * 60); //sets the cookie for 1 day
                     response.addCookie(userCookie);
                     //user authenticated now pull data from DB
                     directPage = "countdown";
