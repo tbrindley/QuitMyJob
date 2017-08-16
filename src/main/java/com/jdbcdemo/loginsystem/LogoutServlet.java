@@ -13,7 +13,7 @@ public class LogoutServlet {
 
         Cookie userCookie = cookies[0];
 
-        userCookie.setMaxAge(0); //clears out user cookie
+        userCookie.setMaxAge(5); //clears out user cookie
         response.addCookie(userCookie);
 
         return "index";

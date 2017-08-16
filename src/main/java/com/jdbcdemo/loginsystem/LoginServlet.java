@@ -16,8 +16,13 @@ import java.util.ArrayList;
  * Created by Travis Brindley on 8/15/2017.
  */
 public class LoginServlet {
+
     public static int getClient(String username, String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
         int client_id = 0;
+
+    public static String login(String username, String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
+        String directPage = "index";
+
 
         Session session = HibernateUtil.getSessionFactory().openSession(); //creates session to database
         Transaction tx = session.beginTransaction();
@@ -29,16 +34,18 @@ public class LoginServlet {
             Clients tempClient = list.get(i);
             if (username.equalsIgnoreCase(tempClient.getUserId())) {
                 String securePassword = Password.MD5(password);
-                System.out.println(securePassword);
+                System.out.println("Secure Password: " + securePassword);
+                System.out.println("object password: " + tempClient.getPassword());
                 if (securePassword.equals(tempClient.getPassword())) {
-                    client_id = tempClient.getClientId();
+                    int client_id = tempClient.getClientId();
                     Cookie userCookie = new Cookie("userId", Integer.toString(client_id));
                     userCookie.setMaxAge(24*60*60); //sets the cookie for 1 day
                     response.addCookie(userCookie);
                     //user authenticated now pull data from DB
+                    directPage = "countdown";
                 }
             }
         }
-        return client_id;
+        return directPage;
     }
 }

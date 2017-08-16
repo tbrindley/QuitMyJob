@@ -80,6 +80,7 @@ public class HomeController {
         newClient.setJob(career);
 
         Integer clientId = (Integer) session.save(newClient);
+
         tx.commit();
 //        session.close();
 
@@ -109,10 +110,19 @@ public class HomeController {
     }
 
     @RequestMapping("/login")
-    public String login(Model model, @RequestParam("userName") String username, @RequestParam("password") String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
+    public String login(Model model, @RequestParam("userName") String username, @RequestParam("password") String password, HttpServletResponse response, HttpServletRequest request) throws NoSuchProviderException, NoSuchAlgorithmException {
+
 
         String encodedpwd = Password.MD5(password);
-        int client_id = LoginServlet.getClient(username, encodedpwd, response);
+        String reDirect = LoginServlet.login(username, encodedpwd, response);
+
+        //calls the cookie for the user & gets their client_Id
+        Cookie[] cookies = request.getCookies();
+        String client = cookies[0].getValue();
+        System.out.println(client);
+
+        int client_id = Integer.parseInt(client);
+
 
 
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
@@ -123,7 +133,7 @@ public class HomeController {
         model.addAttribute("hours", arrayList[2]);
         model.addAttribute("min", arrayList[3]);
 
-        return "countdown";
+        return reDirect;
 
     }
 
