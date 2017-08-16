@@ -228,12 +228,6 @@ public class HomeController {
             }
         }
 
-    @RequestMapping("/breakdown")
-    public String userBreakdown() {
-
-        return "breakdown";
-    }
-
     @RequestMapping("/jobsearch")
     public ModelAndView getIndeed(Model model) {
         String jsonString = callURL("http://api.indeed.com/ads/apisearch?publisher=2945076701195809&q=java&l=detroit&format=json&sort=&radius=&st=&jt=&start=&limit=50&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2");
