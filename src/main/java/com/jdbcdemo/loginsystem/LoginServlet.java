@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class LoginServlet {
     public static int getClient(String username, String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
-        int client_id=0;
+        int client_id = 0;
 
         Session session = HibernateUtil.getSessionFactory().openSession(); //creates session to database
         Transaction tx = session.beginTransaction();

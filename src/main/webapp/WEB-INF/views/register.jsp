@@ -66,7 +66,7 @@
     </div>
     <div class="jumbotron">
 
-        <form method = "post" action ="/addUserFinancials">
+        <form method = "post" action ="/addUserFinancials" onsubmit="return validate()">
 
             <label><b>User Name:</b></label>
             <br>

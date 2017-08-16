@@ -208,10 +208,10 @@ public class HomeController {
         if (loggedin) {
             Cookie[] cookies = request.getCookies();
 
+
             String client = cookies[0].getValue();
             System.out.println(client);
             int client_id = Integer.parseInt(client);
-
 
                 return "update";
             }
@@ -219,7 +219,7 @@ public class HomeController {
                 return "index";
             }
         }
-    
+
     @RequestMapping("/breakdown")
     public String userBreakdown() {
 

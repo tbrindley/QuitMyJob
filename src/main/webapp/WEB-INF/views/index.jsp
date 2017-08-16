@@ -200,7 +200,7 @@
         <div class="loginmodal-container">
             <h1>Login to Your Account</h1><br>
 
-            <form name="login" action="/login" onsubmit="return validate()" method="post">
+            <form name="login" action="/login" method="post">
                 <input type="text" id="userName" name="userName" placeholder="Username" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <input type="submit" name="login" class="login loginmodal-submit" value="Login">
