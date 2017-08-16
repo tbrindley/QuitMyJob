@@ -67,7 +67,7 @@
         </Center>
     </div>
     <div class="jumbotron">
-        
+
 
         <form name="createUser" action ="/addUserFinancials" onsubmit="return validateUserCreation()" method = "post">
 
