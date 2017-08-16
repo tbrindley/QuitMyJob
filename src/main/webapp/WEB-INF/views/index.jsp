@@ -193,7 +193,7 @@
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <h2 class="section-heading">We've got what you need!</h2>
                 <hr class="light">
-                <p class="text-faded">Let's face it... we've all dreamed of quiting our job.  By using our simple application, we will do all the hard work in figuring out if you can quit your job.  We'll tell you how long you can be unemployed based off your current financial situation, provide you with job listings based off your current career, and even write your resignation letter if you decide to quit!</p>
+                <p class="text-faded">Let's face it... we've all dreamed of quitting our job.  By using our simple application, we will do all the hard work in figuring out if you can quit your job.  We'll tell you how long you can be unemployed based off your current financial situation, provide you with job listings based off your current career, and even write your resignation letter if you decide to quit!</p>
                 <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
             </div>
         </div>
