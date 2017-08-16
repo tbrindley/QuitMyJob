@@ -10,6 +10,7 @@ import com.jdbcdemo.BoLS;
 import com.jdbcdemo.TimeLeft;
 import com.jdbcdemo.loginsystem.CheckCookie;
 import com.jdbcdemo.loginsystem.LoginServlet;
+import com.jdbcdemo.loginsystem.LogoutServlet;
 import com.jdbcdemo.util.HibernateUtil;
 import org.apache.http.HttpHost;
 import org.apache.http.client.HttpClient;
@@ -45,7 +46,6 @@ import java.util.ArrayList;
 
 @Controller
 public class HomeController {
-
 
     @RequestMapping("/")
     public String homePage() {
@@ -132,9 +132,7 @@ public class HomeController {
         model.addAttribute("min", arrayList[3]);
 
         return reDirect;
-
     }
-
 
     @RequestMapping("/addGuestFinancials")
     public String addGuestFinancials(Model model) {
@@ -359,8 +357,8 @@ public class HomeController {
     }
 
     @RequestMapping("/logout")
-    public String logout() {
-        String page = logout();
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        String page = LogoutServlet.logout(response, request);
         return page;
     }
 }

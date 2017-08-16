@@ -26,6 +26,7 @@ public class LoginServlet {
 
         Criteria crit = session.createCriteria(Clients.class);
         //crit.add(Restrictions.like("user_id",username));
+
         ArrayList<Clients> list = (ArrayList<Clients>) crit.list();
         for (int i = 0; i < list.size(); i++) {
             Clients tempClient = list.get(i);
@@ -34,7 +35,7 @@ public class LoginServlet {
                 String securePassword = Password.MD5(password);
                 System.out.println("Secure Password: " + securePassword);
                 System.out.println("object password: " + tempClient.getPassword());
-                
+
                 if (securePassword.equals(tempClient.getPassword())) {
                     int client_id = tempClient.getClientId();
                     Cookie userCookie = new Cookie("userId", Integer.toString(client_id));
