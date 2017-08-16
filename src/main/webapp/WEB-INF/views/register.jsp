@@ -69,7 +69,7 @@
     <div class="jumbotron">
 
 
-        <form name="createUser" action ="/addUserFinancials" onsubmit="return validateUserCreation()" method = "post">
+        <form name="createUser" action ="/addUserFinancials" onsubmit= "return validateUserCreation()" method = "post">
 
             <label><b>User Name:</b></label>
             <br>
