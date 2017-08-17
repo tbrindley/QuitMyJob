@@ -24,28 +24,38 @@ function validateCreateUser() {
     var city = document.forms["createUser"]["city"].value;
 
     if(username.length < 5){
-        alert("Username must be at least 5 characters long");
+        addAlert("messagealert","Username must be at least 5 characters long", true);
         return false;
     }
     else if(pass.length < 8){
-        alert("Password must be at least 8 characters long");
+        addAlert("messagealert","Password must be at least 8 characters long", true);
         return false;
     }
     else if(pass != confirmpass){
-       alert("Password & Confirm Password don't match");
+       addAlert("messagealert","Password & Confirm Password don't match", true);
        return false;
     }
     else if(!/^[A-Za-z ]*$/g.test(job)){
-        alert("Please enter a valid job");
+        addAlert("messagealert","Please enter a valid job", true);
         return false;
     }
     else if(!/^[A-Za-z ]*$/g.test(city)) {
-        alert("Please enter a valid job");
+        addAlert("messagealert","Please enter a valid job", true);
         return false;
     }
     else{
-
+        addAlert("messagealert","Thank you for registering", false);
     }
     return true;
 
+}
+/*
+ * Add alert message function
+ */
+function addAlert(id, message, isError){
+    if(isError){
+        document.getElementById(id).innerHTML='<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + message + '</div>';
+    }else{
+        document.getElementById(id).innerHTML='<div class="alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + message + '</div>';
+    }
 }

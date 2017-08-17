@@ -72,6 +72,7 @@
     </div>
     <div class="jumbotron">
 
+        <div id="messagealert"></div>
 
         <form name="createUser" action ="/addUserFinancials" onsubmit="return validateCreateUser()" method = "post" >
 
