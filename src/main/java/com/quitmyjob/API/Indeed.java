@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class Indeed {
     public static String getIndeed(HttpServletRequest request){
         Clients userClient = GetClient.getclient(request);
-        String job = userClient.getJob();
+        String job = noSpace(userClient.getJob());
        // String jsonString = callURL("http://api.indeed.com/ads/apisearch?publisher="+ APIkeys.indeed+"&q=java&l=detroit&format=json&sort=&radius=&st=&jt=&start=&limit=50&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2");
         String jsonString = callURL("http://api.indeed.com/ads/apisearch?publisher="+ APIkeys.indeed+"&q="+job+"&l=detroit&format=json&sort=&radius=&st=&jt=&start=&limit=50&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2");
 
@@ -99,6 +99,18 @@ public class Indeed {
         }
 
         return sb.toString();
+    }
+    private static String noSpace(String job){
+        StringBuilder userJob = new StringBuilder(job);
+        System.out.println(userJob);
+        for(int i=0; i < userJob.length(); i++){
+            if(userJob.charAt(i) == ' '){
+                userJob.setCharAt(i,'+');
+            }
+        }
+        String newJob = userJob.toString();
+        System.out.println(newJob);
+        return newJob;
     }
 
 }
