@@ -123,6 +123,7 @@ public class HomeController {
         userCookie.setMaxAge(24 * 60 * 60); //sets the cookie for 1 day
         response.addCookie(userCookie);
 
+/*
         String clientName = GetClient.getclient(request).getUserId();
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
@@ -132,8 +133,9 @@ public class HomeController {
         model.addAttribute("hours", arrayList[2]);
         model.addAttribute("min", arrayList[3]);
         model.addAttribute("clientName", clientName);
-
-        return "countdown";
+*/
+        model.addAttribute("userCreated","User created.  Please login");
+        return "index";
     }
 
     //------------ End of Account setup Links -----------------

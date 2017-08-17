@@ -171,6 +171,7 @@
             <h1 id="homeHeading">Want to Quit Your Job?</h1>
             <hr>
             <p>some basic info about the app</p>
+            <p>${userCreated}</p>
             <a href="#about" class="btn btn-primary btn-xl page-scroll">Find Out More</a>
         </div>
     </div>
