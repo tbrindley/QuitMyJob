@@ -25,21 +25,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <style>
-        .bad{background-image:url(../../webresources/img/firebackground.gif);
-            background-size: cover;
-            background-position: center;
+        body{background-image: url("http://www.wallpapersbrowse.com/images/ak/akeodvn.jpg");
+            background-size: cover;}
+        .bad{background-color: coral;
             border: solid 2px red;
-            color:yellow;}
-        .ok{background-image:url(../../webresources/img/kermit.gif);
-            background-size:cover;
-            background-position: 15%;
+            color:yellow;
+            text-shadow: #0b0b0b}
+        .ok{background-color:yellow;
             border: solid 2px yellow;
-            color: yellow;}
+            color: black;
+            text-shadow: #0b0b0b}
 
-        .good{background-image:url(../../webresources/img/happybackground.jpg);
-            background-size: cover;
+        .good{background-color: lime;
             border: solid 2px green;
-            color: lime;}
+            color: black;
+            text-shadow: #0b0b0b}
 
     </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -88,8 +88,8 @@
 
     <div class="page-header">
         <Center>
-            <h1>If you quit your job right now...</h1>
-            <h2>You would make it</h2>
+            <h1>If you quit your job right now,</h1>
+            <h2>You would make it...</h2>
         </Center>
     </div>
     <div class="jumbotron" id="test" style="padding-top: 6%; text-align: center; font-size: 54px">
@@ -138,20 +138,20 @@
 
             if (mon >= 3) {
                 document.getElementById("test").classList.add("good");
-                document.getElementById("feedback").innerHTML = "<center><h1>Good News!!!!</h1></center>With at least three months of time before you " +
-                    "would be strapped for cash, feel free to quit that job!  <a href='/jobsearch'>Here</a> is a link to some relevant jobs"
+                document.getElementById("feedback").innerHTML = "<center><h3>Should I quit?</h3><h1>Good News!!!!</h1>With at least three months of time before you " +
+                    "would be strapped for cash, feel free to quit that job!  <a href='/jobsearch'>Here</a> is a link to some relevant jobs.</center>"
             }
             else if (mon === 2) {
                 document.getElementById("test").classList.add("ok");
-                document.getElementById("feedback").innerHTML = "<center><h1>Sorry, we're not much help</h1></center>With at least two months of time before you " +
+                document.getElementById("feedback").innerHTML = "<center><h3>Should I quit?</h3><h1>Sorry, we're not much help</h1>With at least two months of time before you " +
                     "would be strapped for cash, we feel you're on the bubble.  If you're the kind of person who likes to live on the edge," +
-                    "quit that job, otherwise, looks like you're going back.    <a href='/jobsearch'>Here</a> is a link to some relevant jobs to help you dream"
+                    "quit that job, otherwise, looks like you're going back.    <a href='/jobsearch'>Here</a> is a link to some relevant jobs to help you dream.</center>"
             }
             else {
                 document.getElementById("test").classList.add("bad");
-                document.getElementById("feedback").innerHTML = "<center><h1>Heck No!!!!</h1></center>You can't even make it 2 months without a job " +
+                document.getElementById("feedback").innerHTML = "<center><h3>Should I quit?</h3><h1>Heck No!!!!</h1>You can't even make it 2 months without a job " +
                     "without being strapped for cash.  Accounting for the slow moving nature of bureaucracy, leaving now would be a" +
-                    " very bad idea.  To help you dream,  <a href='/jobsearch'>Here</a> is a link to some relevant jobs"
+                    " very bad idea.  To help you dream,  <a href='/jobsearch'>Here</a> is a link to some relevant jobs.</center>"
             }
             // Output the result in an element with id="demo"
             document.getElementById("test").innerHTML = mon + " mon " + d + " days <br><span style='font-size: 34px'>" + h + " hrs "
