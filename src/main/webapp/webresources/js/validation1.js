@@ -6,12 +6,15 @@ function validateLogin(){
    var password = document.forms["login"]["password"].value;
 
    if(username.length < 5){
-      alert("Username must be at least 5 characters long");
+      addAlert("messagealert","Username must be at least 5 characters long", true);
       return false;
    }
    if(password.length < 8){
-      alert("Password must be at least 8 characters long");
+      addAlert("messagealert","Password must be at least 8 characters long", true);
       return false;
+   }
+   else{
+       addAlert("messagealert","Success", false);
    }
    return true;
 }

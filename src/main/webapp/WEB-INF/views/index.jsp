@@ -194,7 +194,7 @@
             <h1>Login to Your Account</h1><br>
 
 
-            <form name="login" action="/login" method="post" >
+            <form name="login" action="/login" onsubmit="return validateLogin()" method="post">
                <span style="font-weight: bold; color: red"> ${alert} </span>
                 <input type="text" id="userName" name="userName" placeholder="Username" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
