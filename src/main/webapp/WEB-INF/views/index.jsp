@@ -195,7 +195,7 @@
 
 
             <form name="login" action="/login" method="post" >
-
+               <span style="font-weight: bold; color: red"> ${alert} </span>
                 <input type="text" id="userName" name="userName" placeholder="Username" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
                 <input type="submit" name="login" class="login loginmodal-submit" value="Login">

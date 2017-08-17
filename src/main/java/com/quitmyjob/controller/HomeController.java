@@ -97,7 +97,6 @@ public class HomeController {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
 
-
         //This will add up the information from each section and send the totals to the DB.
 
         int housing = rent + utils + gas;
@@ -156,6 +155,7 @@ public class HomeController {
             return "countdown";
         }
         else {
+            model.addAttribute("alert","Invalid username & password");
             return "index";
         }
     }
