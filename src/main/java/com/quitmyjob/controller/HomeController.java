@@ -92,7 +92,8 @@ public class HomeController {
                            @RequestParam("restaurant") int rest, @RequestParam("creditCard") int cCard,
                            @RequestParam("s_loans") int s_loans, @RequestParam("o_debt") int o_debt,
                            @RequestParam("o_expense") int o_exp, @RequestParam("meds") int meds,
-                           @RequestParam("clientId") int client_id, HttpServletRequest request) {
+                           @RequestParam("clientId") int client_id, HttpServletRequest request,
+                           HttpServletResponse response) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
@@ -118,7 +119,9 @@ public class HomeController {
         tx.commit();
         //session.close();
 
-        int client = GetCookie.getCookie(request);
+        Cookie userCookie = new Cookie("userId", Integer.toString(client_id));
+        userCookie.setMaxAge(24 * 60 * 60); //sets the cookie for 1 day
+        response.addCookie(userCookie);
 
         String clientName = GetClient.getclient(request).getUserId();
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
