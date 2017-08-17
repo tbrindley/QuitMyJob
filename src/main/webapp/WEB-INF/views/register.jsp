@@ -75,7 +75,7 @@
 
         <form name="createUser" action ="/addUserFinancials" onsubmit="return validateCreateUser()" method = "post" >
 
-            <label><b>User Name:</b></label>
+            <label><b>User Name:(At least 5 characters)</b></label>
             <br>
             <input type ="text" placeholder ="Enter a username" name ="user_id" class="form-control" required>
             <br>
