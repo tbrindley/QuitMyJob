@@ -118,7 +118,7 @@ public class HomeController {
         tx.commit();
         //session.close();
 
-        GetCookie.getCookie(request);
+        int client = GetCookie.getCookie(request);
 
         String clientName = GetClient.getclient(request).getUserId();
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
