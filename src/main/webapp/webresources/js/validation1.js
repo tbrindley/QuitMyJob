@@ -35,11 +35,11 @@ function validateCreateUser() {
        alert("Password & Confirm Password don't match");
        return false;
     }
-    else if(!/^[A-Za-z]*$/g.test(job)){
+    else if(!/^[A-Za-z ]*$/g.test(job)){
         alert("Please enter a valid job");
         return false;
     }
-    else if(!/^[A-Za-z]*$/g.test(city)) {
+    else if(!/^[A-Za-z ]*$/g.test(city)) {
         alert("Please enter a valid job");
         return false;
     }

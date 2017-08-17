@@ -85,7 +85,7 @@
             <input type ="email" placeholder ="Enter an Email" name ="email" class="form-control" required>
             <br>
             <br>
-            <label><b>Password:</b></label>
+            <label><b>Password:(Must be at least 8 characters)</b></label>
             <br>
             <input type ="password" placeholder ="Enter a password" name ="psw" class="form-control" minlength="6">
             <br>
