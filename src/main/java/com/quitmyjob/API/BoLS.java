@@ -1,5 +1,6 @@
 package com.quitmyjob.API;
 
+import com.quitmyjob.secretstuff.APIkeys;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -51,7 +52,7 @@ public class BoLS {
             StringEntity input = new StringEntity("{\"seriesid\":[\"CXUHOUSINGLB1103M\",\"CXUUTILSLB1103M\",\"CXUGASOILLB1103M\"," +
                     "\"CXU500110LB1103M\",\"CXUVEHPURCHLB1103M\",\"CXUFOODHOMELB1103M\",\"CXUFOODAWAYLB1103M\"," +
                     "\"CXUEDUCATNLB1103M\",\"CXUHLTHINSRLB1103M\",\"CXUMISCLB1103M\"]," +
-                    " \"registrationkey\": \"7d91307a15b744eca9c42ac828a1d070\"}");
+                    " \"registrationkey\": \"" + APIkeys.bols + "\"}");
 
 
             input.setContentType("application/json");

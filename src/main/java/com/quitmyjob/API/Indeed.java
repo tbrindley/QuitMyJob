@@ -1,21 +1,38 @@
 package com.quitmyjob.API;
 
+import com.fp.dao.GetClient;
+import com.fp.models.Clients;
+import com.fp.models.Finances;
+import com.quitmyjob.loginsystem.GetCookie;
+import com.quitmyjob.secretstuff.APIkeys;
+import com.quitmyjob.util.HibernateUtil;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 /**
  * Created by Travis Brindley on 8/16/2017.
  */
 public class Indeed {
-    public static String getIndeed(){
-        String jsonString = callURL("http://api.indeed.com/ads/apisearch?publisher=2945076701195809&q=java&l=detroit&format=json&sort=&radius=&st=&jt=&start=&limit=50&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2");
+    public static String getIndeed(HttpServletRequest request){
+        Clients userClient = GetClient.getclient(request);
+        String job = userClient.getJob();
+       // String jsonString = callURL("http://api.indeed.com/ads/apisearch?publisher="+ APIkeys.indeed+"&q=java&l=detroit&format=json&sort=&radius=&st=&jt=&start=&limit=50&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2");
+        String jsonString = callURL("http://api.indeed.com/ads/apisearch?publisher="+ APIkeys.indeed+"&q="+job+"&l=detroit&format=json&sort=&radius=&st=&jt=&start=&limit=50&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2");
+
         System.out.println("\n\njsonString: " + jsonString);
 
 // Replace this try catch block for all below subsequent examples

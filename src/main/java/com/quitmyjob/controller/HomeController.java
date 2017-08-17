@@ -4,6 +4,7 @@ package com.quitmyjob.controller;
  * Created by Travis Brindley on 7/21/2017.
  */
 
+import com.fp.dao.GetClient;
 import com.fp.models.Clients;
 import com.fp.models.Finances;
 import com.quitmyjob.API.BoLS;
@@ -120,6 +121,7 @@ public class HomeController {
 
         GetCookie.getCookie(request);
 
+        String clientName = GetClient.getclient(request).getUserId();
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
         //populates financial form with Midwest averages
@@ -127,6 +129,7 @@ public class HomeController {
         model.addAttribute("days", arrayList[1]);
         model.addAttribute("hours", arrayList[2]);
         model.addAttribute("min", arrayList[3]);
+        model.addAttribute("clientName", clientName);
 
         return "countdown";
     }
@@ -141,12 +144,14 @@ public class HomeController {
         if(reDirect) {
             int client_id = GetCookie.getCookie(request);
             int[] arrayList = TimeLeft.getTimeLeft(client_id);
+            String clientName = GetClient.getclient(request).getUserId();
 
             //populates financial form with Midwest averages
             model.addAttribute("months", arrayList[0]);
             model.addAttribute("days", arrayList[1]);
             model.addAttribute("hours", arrayList[2]);
             model.addAttribute("min", arrayList[3]);
+            model.addAttribute("clientName",clientName);
 
             return "countdown";
         }
@@ -155,59 +160,25 @@ public class HomeController {
         }
     }
 
-    @RequestMapping("/addGuestFinancials")
-    public String addGuestFinancials(Model model) {
-
-        int[] arrayList = BoLS.getBoLS();
-
-        //populates financial form with Midwest averages
-        model.addAttribute("rent", arrayList[0]);
-        model.addAttribute("utilities", arrayList[1]);
-        model.addAttribute("autoGas", arrayList[2]);
-        model.addAttribute("carInsurance", arrayList[3]);
-        model.addAttribute("carPayment", arrayList[4]);
-        model.addAttribute("groceries", arrayList[5]);
-        model.addAttribute("restaurant", arrayList[6]);
-        model.addAttribute("studentLoans", arrayList[7]);
-        model.addAttribute("medInsurance", arrayList[8]);
-        model.addAttribute("miscExpenses", arrayList[9]);
-        model.addAttribute("creditCard", arrayList[10]);
-        model.addAttribute("otherMisc", arrayList[11]);
-        return "createfinancials";
-    }
-
-    @RequestMapping("/updateuser")
-    public String updateUser(HttpServletRequest request) {
-        boolean loggedin = CheckCookie.checkCookie(request);
-        if (loggedin) {
-            Cookie[] cookies = request.getCookies();
-
-            String client = cookies[0].getValue();
-            System.out.println(client);
-
-                return "update";
-            }
-            else{
-                return "index";
-            }
-        }
-
     @RequestMapping("/jobsearch")
-    public String getJobs(Model model) {
-        String text = Indeed.getIndeed();
+    public String getJobs(Model model, HttpServletRequest request) {
+        String text = Indeed.getIndeed(request);
         model.addAttribute("jSonArray", text);
+        String clientName = GetClient.getclient(request).getUserId();
+        model.addAttribute("clientName", clientName);
         return "jobsearch";
     }
 
-
     @RequestMapping("/quit")
-    public String quitMyJob(HttpServletRequest request) {
+    public String quitMyJob(HttpServletRequest request, Model model) {
         boolean loggedin = CheckCookie.checkCookie(request);
         if (loggedin) {
             Cookie[] cookies = request.getCookies();
 
             String client = cookies[0].getValue();
             System.out.println(client);
+            String clientName = GetClient.getclient(request).getUserId();
+            model.addAttribute("clientName", clientName);
 
             return "quitmyjob";
         } else {
@@ -241,6 +212,8 @@ public class HomeController {
             String client = cookies[0].getValue();
             System.out.println(client);
             int client_id = Integer.parseInt(client);
+            String clientName = GetClient.getclient(request).getUserId();
+            model.addAttribute("clientName", clientName);
 
             int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
