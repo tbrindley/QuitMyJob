@@ -69,7 +69,7 @@
     <div class="jumbotron">
 
 
-        <form name="createUser" action ="/addUserFinancials" onsubmit= "return validateUserCreation()" method = "post">
+        <form name="createUser" action ="/addUserFinancials" onsubmit="return validateCreateUser()" method = "post" >
 
             <label><b>User Name:</b></label>
             <br>
@@ -83,7 +83,7 @@
             <br>
             <label><b>Password:</b></label>
             <br>
-            <input type ="password" placeholder ="Enter a password" name ="psw" class="form-control" required>
+            <input type ="password" placeholder ="Enter a password" name ="psw" class="form-control" minlength="6">
             <br>
             <br>
             <label><b>Repeat Password:</b></label>
@@ -101,7 +101,7 @@
             <input type ="text" placeholder ="City" name ="city" class="form-control" required >
             <br>
             <br>
-            <button type ="submit" class="signupbtn" style="color:black">Sign Up</button>
+            <button type ="submit" class="signupbtn" style="color:black" >Sign Up</button>
 
         </form>
     </div>

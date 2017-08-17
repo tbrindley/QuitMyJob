@@ -16,40 +16,36 @@ function validateLogin(){
    return true;
 }
 
-function validateUserCreation(){
-    var username = document.forms["createUser"]["username"].value;
-    var email = document.forms["createUser"]["email"].value;
-    var psw = document.forms["createUser"]["psw"].value;
-    var confirmpsw = document.forms["createUser"]["psw-repeat"].value;
-    var curjob = document.forms["createUser"]["curjob"].value;
+function validateCreateUser() {
+    var username = document.forms["createUser"]["user_id"].value;
+    var pass = document.forms["createUser"]["psw"].value;
+    var confirmpass = document.forms["createUser"]["psw-repeat"].value;
+    var job = document.forms["createUser"]["curjob"].value;
     var city = document.forms["createUser"]["city"].value;
-
 
     if(username.length < 5){
         alert("Username must be at least 5 characters long");
         return false;
     }
-
-    //checks email for '@' & ensures it only has 1
-    var specialcounter = 0;
-    for(var i = 0; i < email.length; i++){
-        if(email.charAt(i) === '@'){
-            specialcounter += 1;
-        }
-    }
-    if(specialcounter !== 1){
-        alert("Invalid email form.");
-        return false;
-    }
-
-    if(psw.length < 8){
+    else if(pass.length < 8){
         alert("Password must be at least 8 characters long");
         return false;
     }
-    if(psw !== confirmpsw){
+    else if(pass != confirmpass){
        alert("Password & Confirm Password don't match");
        return false;
     }
+    else if(!/^[A-Za-z]*$/g.test(job)){
+        alert("Please enter a valid job");
+        return false;
+    }
+    else if(!/^[A-Za-z]*$/g.test(city)) {
+        alert("Please enter a valid job");
+        return false;
+    }
+    else{
 
+    }
+    return true;
 
 }
