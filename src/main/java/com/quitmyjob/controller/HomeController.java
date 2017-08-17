@@ -147,8 +147,8 @@ public class HomeController {
 
         if(reDirect) {
             int client_id = GetCookie.getCookie(request);
-            int[] arrayList = TimeLeft.getTimeLeft(client_id);
             String clientName = GetClient.getclient(request).getUserId();
+            int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
             //populates financial form with Midwest averages
             model.addAttribute("months", arrayList[0]);
@@ -212,11 +212,7 @@ public class HomeController {
     public String goToCountdown(HttpServletRequest request, Model model) {
         boolean loggedin = CheckCookie.checkCookie(request);
         if (loggedin) {
-            Cookie[] cookies = request.getCookies();
-
-            String client = cookies[0].getValue();
-            System.out.println(client);
-            int client_id = Integer.parseInt(client);
+            int client_id = GetCookie.getCookie(request);
             String clientName = GetClient.getclient(request).getUserId();
             model.addAttribute("clientName", clientName);
 
