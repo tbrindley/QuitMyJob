@@ -1,4 +1,4 @@
-package com.jdbcdemo.API;
+package com.quitmyjob.API;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,9 +43,13 @@ public class Indeed {
         JSONArray ar = jsonObject.getJSONArray("results");
 
 
+
         //loop through json array
         for (int i = 0; i < ar.length(); i++) {
-            text += ("<h6>" + ar.getJSONObject(i).getString("jobtitle") + "</h6>" + "<h6>" + ar.getJSONObject(i).getString("company") + "</h6>" + "<h6>" + ar.getJSONObject(i).getString("url") + "</h6>");
+            text += ("<h3><a href=\"" + ar.getJSONObject(i).getString("url") + "\" target=\"_blank\">" +
+                    ar.getJSONObject(i).getString("jobtitle") + "</a></h3>" +
+                    "<h5> " + ar.getJSONObject(i).getString("company") + "</h5>"+
+                    "<p>Description: " + ar.getJSONObject(i).getString("snippet") + "<hr>");
 
         }
         return text;

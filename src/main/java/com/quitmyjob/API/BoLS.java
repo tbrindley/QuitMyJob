@@ -1,4 +1,4 @@
-package com.jdbcdemo.API;
+package com.quitmyjob.API;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

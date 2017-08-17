@@ -1,4 +1,4 @@
-package com.jdbcdemo.loginsystem;
+package com.quitmyjob.loginsystem;
 
 /**
  * Created by jayme on 8/15/2017.*/

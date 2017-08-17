@@ -1,7 +1,7 @@
-package com.jdbcdemo.loginsystem;
+package com.quitmyjob.loginsystem;
 
 import com.fp.models.Clients;
-import com.jdbcdemo.util.HibernateUtil;
+import com.quitmyjob.util.HibernateUtil;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 
@@ -9,15 +9,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.util.ArrayList;
 
 /**
  * Created by Travis Brindley on 8/15/2017.
  */
 public class LoginServlet {
 
-    public static String login(String username, String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
-        String directPage = "index";
+    public static boolean login(String username, String password, HttpServletResponse response) throws NoSuchProviderException, NoSuchAlgorithmException {
+        boolean loggedIn = true;
 
 
         Session session = HibernateUtil.getSessionFactory().openSession(); //creates session to database
@@ -29,7 +28,7 @@ public class LoginServlet {
         //ArrayList<Clients> list = (ArrayList<Clients>) crit.list();
         Clients tempClient = (Clients) crit.uniqueResult();
         if(tempClient == null){
-            directPage = "index";
+            loggedIn = false;
         }
         else{
             String securePassword = Password.MD5(password);
@@ -39,12 +38,12 @@ public class LoginServlet {
                 userCookie.setMaxAge(24 * 60 * 60); //sets the cookie for 1 day
                 response.addCookie(userCookie);
                 //user authenticated now pull data from DB
-                directPage = "countdown";
+                loggedIn = true;
             }
             else {
-                directPage = "index";
+                loggedIn = false;
             }
         }
-        return directPage;
+        return loggedIn;
     }
 }

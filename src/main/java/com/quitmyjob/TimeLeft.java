@@ -1,12 +1,8 @@
-package com.jdbcdemo;
+package com.quitmyjob;
 
 import com.fp.dao.DAOFactory;
 import com.fp.dao.FinancesDAO;
 import com.fp.models.Finances;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
 
 /**
  * Created by Travis Brindley on 8/10/2017.

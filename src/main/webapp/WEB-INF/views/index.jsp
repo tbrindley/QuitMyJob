@@ -2,13 +2,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: Antonella
-  Date: 7/21/17
-  Time: 11:04 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,7 +149,6 @@
             </button>
             <a class="navbar-brand page-scroll" href="\">QuitMyJob.com</a>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -166,7 +158,6 @@
                 <li>
                     <a class="page-scroll" href="/register">Register</a>
                 </li>
-
             </ul>
         </div>
         <!-- /.navbar-collapse -->
@@ -192,7 +183,7 @@
                 <h2 class="section-heading">We've got what you need!</h2>
                 <hr class="light">
                 <p class="text-faded">Let's face it... we've all dreamed of quitting our job.  By using our simple application, we will do all the hard work in figuring out if you can quit your job.  We'll tell you how long you can be unemployed based off your current financial situation, provide you with job listings based off your current career, and even write your resignation letter if you decide to quit!</p>
-                <a href="#services" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
+                <a href="/register" class="page-scroll btn btn-default btn-xl sr-button">Get Started!</a>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-package com.jdbcdemo.controller;
+package com.quitmyjob.controller;
 
 /**
  * Created by Travis Brindley on 7/21/2017.
@@ -6,14 +6,11 @@ package com.jdbcdemo.controller;
 
 import com.fp.models.Clients;
 import com.fp.models.Finances;
-import com.jdbcdemo.API.BoLS;
-import com.jdbcdemo.API.Indeed;
-import com.jdbcdemo.TimeLeft;
-import com.jdbcdemo.loginsystem.CheckCookie;
-import com.jdbcdemo.loginsystem.LoginServlet;
-import com.jdbcdemo.loginsystem.LogoutServlet;
-import com.jdbcdemo.loginsystem.Password;
-import com.jdbcdemo.util.HibernateUtil;
+import com.quitmyjob.API.BoLS;
+import com.quitmyjob.API.Indeed;
+import com.quitmyjob.TimeLeft;
+import com.quitmyjob.loginsystem.*;
+import com.quitmyjob.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Controller;
@@ -94,7 +91,7 @@ public class HomeController {
                            @RequestParam("restaurant") int rest, @RequestParam("creditCard") int cCard,
                            @RequestParam("s_loans") int s_loans, @RequestParam("o_debt") int o_debt,
                            @RequestParam("o_expense") int o_exp, @RequestParam("meds") int meds,
-                           @RequestParam("clientId") int client_id) {
+                           @RequestParam("clientId") int client_id, HttpServletRequest request) {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
@@ -121,6 +118,7 @@ public class HomeController {
         tx.commit();
         //session.close();
 
+        GetCookie.getCookie(request);
 
         int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
@@ -137,14 +135,11 @@ public class HomeController {
     @RequestMapping("/login")
     public String login(Model model, @RequestParam("userName") String username, @RequestParam("password") String password, HttpServletResponse response, HttpServletRequest request) throws NoSuchProviderException, NoSuchAlgorithmException {
 
-        String reDirect = LoginServlet.login(username, password, response);
+        //verifies user is logged
+        boolean reDirect = LoginServlet.login(username, password, response);
 
-        //calls the cookie for the user & gets their client_Id
-        Cookie[] cookies = request.getCookies();
-        String client = cookies[0].getValue();
-        System.out.println(client);
-
-            int client_id = Integer.parseInt(client);
+        if(reDirect) {
+            int client_id = GetCookie.getCookie(request);
             int[] arrayList = TimeLeft.getTimeLeft(client_id);
 
             //populates financial form with Midwest averages
@@ -153,8 +148,11 @@ public class HomeController {
             model.addAttribute("hours", arrayList[2]);
             model.addAttribute("min", arrayList[3]);
 
-
-        return reDirect;
+            return "countdown";
+        }
+        else {
+            return "index";
+        }
     }
 
     @RequestMapping("/addGuestFinancials")

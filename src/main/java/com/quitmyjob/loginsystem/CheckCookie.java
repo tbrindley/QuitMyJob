@@ -1,4 +1,4 @@
-package com.jdbcdemo.loginsystem;
+package com.quitmyjob.loginsystem;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

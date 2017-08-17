@@ -1,4 +1,4 @@
-package com.jdbcdemo.util;
+package com.quitmyjob.util;
 
 /**
  * Created by Travis Brindley on 7/21/2017.
