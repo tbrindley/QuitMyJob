@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        body{background-image: url("http://www.wallpapersbrowse.com/images/ak/akeodvn.jpg");
+            background-size: cover;}
+    </style>
     <meta charset="utf-8">
     <!-- if using IE use the latest rendering -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
